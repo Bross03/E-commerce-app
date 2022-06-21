@@ -8,12 +8,12 @@ function Home(props){
 
     const [products, setProducts]=useState([]);
     const [category,setCategory]=useState('All Products');
+    const [loggedin,setLoggedin]=useState({});
 
     useEffect(()=>{
         async function load(){
         const data= await fetchProducts();
         setProducts(data);
-        console.log(products);
         }
         load();
         return ()=>{
@@ -34,6 +34,7 @@ function Home(props){
         setCategory(newCategory);
         toggleMenu();
     }
+    
     return(
         <div>
             <nav>

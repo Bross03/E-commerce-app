@@ -13,6 +13,7 @@ function Login(){
         "username":email,
         "password":password
     }
+
     const checkIfEmpty=()=>{
         const message=document.querySelector('.message');
         if(!email){
@@ -40,10 +41,8 @@ function Login(){
         console.log(response);
         navigate('/');
         }catch(err){
-            //IT SAYS UNAUTHORIZED, MAKE IT MORE DESCRIPTIVE
-            message.classList.remove('active');
-            message.innerHTML=err;
-
+            message.classList.add('active');
+            message.innerHTML='Email or password are incorrect';
         }
     }
     return (

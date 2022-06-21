@@ -4,6 +4,9 @@ const router=express.Router();
 const AuthHelper=require('../Helpers/authHelper.js')
 const authHelperInstance=new AuthHelper();
 
+const userHelper=require('../Helpers/userHelper')
+const userHelperInstance= new userHelper();
+
 module.exports=(app, passport)=>{
 
     //setting up router
@@ -14,10 +17,6 @@ module.exports=(app, passport)=>{
         try{
             const data = req.body;
             let correctFormat=true;
-            console.log(!data.hasOwnProperty('first_name'));
-            console.log(!!data.hasOwnProperty('last_name'));
-            console.log(!data.hasOwnProperty('password'));
-            console.log(!data.hasOwnProperty('email'));
             if(!data.hasOwnProperty('first_name') || !data.hasOwnProperty('last_name') 
             || !data.hasOwnProperty('password') || !data.hasOwnProperty('email')){
                 correctFormat=false;
@@ -49,7 +48,7 @@ module.exports=(app, passport)=>{
                 res.status(500).send("Email or password are incorrect");
             }
         }catch(err){
-            res.status(500).send(err);
+            res.status(500).send("Email or password are incorrect");
         }
     });
 
@@ -59,6 +58,13 @@ module.exports=(app, passport)=>{
         res.send("logged out");
         //res.redirect('/auth/login');
       });
-    
+    router.get('/loggedin', (req,res)=>{
+        if(req.session.passport?.user){
+            const user=await userHelperInstance.findUserById(req.session.passport.user);
+            res.status(200).send({user, loggedIn: true});
+        }else{
+            res.status(400).send('Not logged in')
+        }
+    })
     
 }

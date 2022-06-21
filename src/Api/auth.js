@@ -17,3 +17,12 @@ export const login=async (data)=>{
         throw err.response.data
     }
 }
+
+export const isLoggedIn=async ()=>{
+    try{
+        const response=await API.get('loggedin');
+        return response;
+    }catch(err){
+        throw err.response.data
+    }
+}
