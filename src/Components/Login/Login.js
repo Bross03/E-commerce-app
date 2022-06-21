@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import './Login.css';
 import {Link, useNavigate} from 'react-router-dom';
 import { login } from "../../Api/auth";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../store/auth/authActions";
 
 function Login(){
 
     const navigate=useNavigate();
+    const dispatch=useDispatch();
 
     const [password,setPassword]=useState('');
     const [email, setEmail]=useState('');
@@ -37,8 +40,8 @@ function Login(){
         if(checkIfEmpty()){
             return;
         }
-        const response=await login(data);
-        console.log(response);
+        await dispatch(loginUser(data));
+        
         navigate('/');
         }catch(err){
             message.classList.add('active');
