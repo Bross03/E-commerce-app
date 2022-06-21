@@ -7,6 +7,14 @@ nav{
     align-items: center;
     color:white;
     background-color: #302f4e;
+    position: fixed;
+    width:100%;
+    top:0;
+    z-index:1;
+}
+.mainPage{
+    position:absolute;
+    top:3em;
 }
 .hero, .links{
     display: flex;
@@ -52,4 +60,74 @@ ul{
 }
 .category{
     margin:0.5em 1em;
+}
+.action{
+    position: fixed;
+    top:0.5em;
+    right:1em;
+}
+.action .profile{
+    position:relative;
+    overflow: hidden;
+    cursor:pointer;
+}
+.action .profile:hover{
+    color:fuchsia;
+}
+.action .dropMenu{
+    position:absolute;
+    top:3.25em;
+    right:-1em;
+    color:black;
+    padding:1em 2em;
+    width: 10em;
+    background-color:rgb(231, 229, 229);
+    box-sizing: 0 5px 25px rgba(0,0,0,0.1);
+    border-radius: 1em;
+    transition:0.5s;
+    visibility:hidden;
+    opacity:0;
+}
+.action .dropMenu.active{
+    visibility:visible;
+    opacity:1; 
+    z-index:2;
+}
+.action .dropMenu::before{
+    content:'';
+    position:absolute;
+    top:-0.3em;
+    right:2em;
+    width:1em;
+    height:1em;
+    background-color:rgb(231, 229, 229);
+    transform: rotate(45deg);
+}
+
+
+.action .dropMenu ul li{
+    list-style: none;
+    padding:0.5em 0;
+    border-top:1px solid rgba(0, 0, 0, 0.5);
+    direction: flex;
+    align-items: center;
+    justify-content: center;
+}
+.action .dropMenu ul li img{
+    max-width: 20px;
+    margin-right:0.5em;
+    opacity:0.5;
+    transition: 0.5s;
+}
+.action .dropMenu ul li:hover img{
+    opacity:1;
+}
+.action .dropMenu ul li .dropMenuLink{
+    display:inline-block;
+    text-decoration: none;
+    color:#555;
+    transition:0.5s;
+}
+.action .dropMenu ul li:hover .dropMenuLink{
+    color:fuchsia;
 }

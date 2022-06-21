@@ -1,11 +1,17 @@
 import "./Signup.css";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { register } from "../../Api/auth";
+import { useDispatch } from "react-redux";
+import { checkLoginStatus } from "../../store/auth/authActions";
+
+import { login, register } from "../../Api/auth";
 
 function Signup(){
 
     const navigate = useNavigate();
+    const dispatch=useDispatch();
+
+   
 
     const [password,setPassword]=useState('');
     const [confirmPassword,setConfirmPassword]=useState('');
@@ -15,7 +21,7 @@ function Signup(){
     const [google, setGoogle]=useState({});
     const [facebook, setFacebook]=useState({});
 
-    let data={
+    const data={
         'first_name':firstName,
         'last_name':lastName,
         'email':email,
@@ -23,6 +29,10 @@ function Signup(){
         'facebook':facebook,
         'google':google
     };
+    const loginData={
+        "username":email,
+        "password":password
+    }
     const checkIfEmpty=()=>{
         const message=document.querySelector('.message');
         if(!password){
@@ -59,29 +69,30 @@ function Signup(){
         e.preventDefault();
         const message=document.querySelector('.message');
         try{
-        if(checkIfEmpty()){
-            return;
-        }
-        if(password!=confirmPassword){
-            message.classList.add('active');
-            message.innerHTML='Passwords do not match';
-            return;
-        }
-        const response=await register(data);
-        console.log(response);
-    
-        setEmail('');
-        setConfirmPassword('');
-        setPassword('');
-        setFirstName('');
-        setLastName('');
-        navigate('../');
+            if(checkIfEmpty()){
+                return;
+            }
+            if(password!=confirmPassword){
+                message.classList.add('active');
+                message.innerHTML='Passwords do not match';
+                return;
+            }
+            await register(data);
+            await login(loginData);
+            await dispatch(checkLoginStatus());
+            setEmail('');
+            setConfirmPassword('');
+            setPassword('');
+            setFirstName('');
+            setLastName('');
+            navigate('/');
 
-        return response;
-    }catch(err){
-        message.classList.add('active');
-        message.innerHTML=err;
-    }
+            return;
+        }catch(err){
+            
+            message.classList.add('active');
+            message.innerHTML=err;
+        }
     }
     return(
         <div className="signUpPage">

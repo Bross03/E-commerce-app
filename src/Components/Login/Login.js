@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import './Login.css';
 import {Link, useNavigate} from 'react-router-dom';
-import { login } from "../../Api/auth";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../../store/auth/authActions";
+import { checkLoginStatus} from "../../store/auth/authActions";
+import { login } from "../../Api/auth";
 
 function Login(){
 
     const navigate=useNavigate();
     const dispatch=useDispatch();
+
+   
 
     const [password,setPassword]=useState('');
     const [email, setEmail]=useState('');
@@ -33,17 +35,20 @@ function Login(){
             return false;
         }
     }
-    const onSubmitLogin=async (e)=>{
+    const onSubmitLogin= async (e)=>{
         e.preventDefault();
         const message=document.querySelector('.message');
         try{
         if(checkIfEmpty()){
             return;
         }
-        await dispatch(loginUser(data));
-        
+        await login(data);
+        await dispatch(checkLoginStatus());
+    
         navigate('/');
+            
         }catch(err){
+            console.log(err);
             message.classList.add('active');
             message.innerHTML='Email or password are incorrect';
         }

@@ -3,9 +3,11 @@ import API from './client';
 export const register=async (data)=>{
     try{
         const response=await API.post('auth/register',data);
-        return response;
+        console.log(response);
+        return response.data;
+        
     }catch(err){
-        throw err.response.data
+        throw err.response.data;
     }
 }
 
@@ -20,9 +22,17 @@ export const login=async (data)=>{
 
 export const isLoggedIn=async ()=>{
     try{
-        const response=await API.get('loggedin');
+        const response=await API.get('auth/loggedin');
         return response;
     }catch(err){
         throw err.response.data
+    }
+}
+export const logout=async ()=>{
+    try{
+        const response=await API.get('auth/logout');
+        return response;
+    }catch(err){
+        throw err.response;
     }
 }

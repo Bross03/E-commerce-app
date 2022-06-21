@@ -3,12 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import { fetchProducts } from "../../Api/product";
 import Products from "../Products/Products";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../../store/auth/authActions";
 
 function Home(props){
 
+    const dispatch=useDispatch();
     const [products, setProducts]=useState([]);
     const [category,setCategory]=useState('All Products');
-    const [loggedin,setLoggedin]=useState({});
+    const {isAuthenticated, user}= useSelector(state=>state.auth)
 
     useEffect(()=>{
         async function load(){
@@ -21,6 +24,10 @@ function Home(props){
         };
     },[]);
     
+    const toggleProfileMenu=()=>{
+        const toggleProfileDropMenu=document.querySelector('.dropMenu');
+        toggleProfileDropMenu.classList.toggle('active');
+    }
     const toggleMenu=()=>{
         const sidebar= document.querySelector(".sidebar");
         if(sidebar.classList.contains("open")){
@@ -34,7 +41,14 @@ function Home(props){
         setCategory(newCategory);
         toggleMenu();
     }
-    
+    const handleLogout=async ()=>{
+        try{
+        await dispatch(logoutUser());
+        toggleProfileMenu();
+        }catch(err){
+            return err;
+        }
+    }
     return(
         <div>
             <nav>
@@ -44,23 +58,40 @@ function Home(props){
                     </button>
                     <h2 className="navbar logo">Nile.com</h2>
                 </div>
+                {
+                    isAuthenticated ? 
+                <div className="action links">
+                    <div className="profile" onClick={toggleProfileMenu}>
+                        <h3>Hello {user.first_name}</h3>
+                    </div>
+                    <div className="dropMenu">
+                        <ul>
+                            <li><img src="" /><Link to='/cart' className="dropMenuLink">My cart</Link></li>
+                            <li><img src="" /><Link to='/orders' className="dropMenuLink">My orders</Link></li>
+                            <li><img src="" /><Link to='/' className="dropMenuLink" onClick={handleLogout}>Logout</Link></li>
+                        </ul>
+                    </div>
+                </div>
+                :
                 <div className="links">
-                    <Link to="/cart" className="navbar cartLink">Cart</Link>
                     <Link to="/login" className="navbar signinLink">Log in</Link>
                     <Link to='/signup' className="navbar signupLink">Sign up</Link>
                 </div>
+                }
             </nav>
-            <aside className="sidebar">
-                <h3>Categories</h3>
-                <button className="close" onClick={toggleMenu}>X</button>
-                <ul>
-                    <li><a href="#" onClick={changeCategory}>All Products</a></li>
-                    <li><a href="#" onClick={changeCategory}>Women</a></li>
-                    <li><a href="#" onClick={changeCategory}>Men</a></li>
-                </ul>
-            </aside>
-            <h1 className="category">{category}</h1>
-            <Products products={products}/>
+            <div className="mainPage">
+                <aside className="sidebar">
+                    <h3>Categories</h3>
+                    <button className="close" onClick={toggleMenu}>X</button>
+                    <ul>
+                        <li><a href="#" onClick={changeCategory}>All Products</a></li>
+                        <li><a href="#" onClick={changeCategory}>Women</a></li>
+                        <li><a href="#" onClick={changeCategory}>Men</a></li>
+                    </ul>
+                </aside>
+                <h1 className="category">{category}</h1>
+                <Products products={products}/>
+            </div>
         </div>
     )
 }

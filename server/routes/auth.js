@@ -58,7 +58,7 @@ module.exports=(app, passport)=>{
         res.send("logged out");
         //res.redirect('/auth/login');
       });
-    router.get('/loggedin', (req,res)=>{
+    router.get('/loggedin', async (req,res)=>{
         if(req.session.passport?.user){
             const user=await userHelperInstance.findUserById(req.session.passport.user);
             res.status(200).send({user, loggedIn: true});
