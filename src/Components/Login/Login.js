@@ -42,6 +42,7 @@ function Login(){
         if(checkIfEmpty()){
             return;
         }
+        
         await login(data);
         await dispatch(checkLoginStatus());
     

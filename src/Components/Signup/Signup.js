@@ -80,6 +80,7 @@ function Signup(){
             await register(data);
             await login(loginData);
             await dispatch(checkLoginStatus());
+            
             setEmail('');
             setConfirmPassword('');
             setPassword('');
