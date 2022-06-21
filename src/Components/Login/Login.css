@@ -1,0 +1,64 @@
+.loginPage{
+    background-color: rgb(17, 194, 194);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    height:100vh;
+  
+}
+.loginCard{
+    width: 350px;
+    background-color: white;
+    min-height: 100px;
+    height:50%;
+}
+.loginForm{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1em;
+    height:70%;
+}
+.title{
+    padding: 1em 1em 0 1em;
+}
+h2{
+    margin:0 0 0.3em 0;
+}
+.loginFormDescription{
+    color:grey;
+}
+.submitButtonLogin {
+    border-color: aqua;
+    background-image: -webkit-linear-gradient(45deg, aqua 50%, transparent 50%);
+    background-image: linear-gradient(45deg, aqua 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: 400ms ease-in-out;
+    transition: 400ms ease-in-out;
+    border-radius: 1em;
+    padding:0.7em;
+    width:10em;
+}
+
+.submitButtonLogin:hover {
+    background-position: 0;
+    color: white;
+}
+.signup{
+    color:white;
+    margin:0.2em;
+}
+.signupLink{
+    color:white;
+}
+.message.active{
+    background-color: red;
+    padding:0.5em 2em;
+    margin:1em;
+    color:white;
+    border-radius:1em;
+}

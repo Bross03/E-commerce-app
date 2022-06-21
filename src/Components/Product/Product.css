@@ -1,0 +1,21 @@
+.image{
+    height:300px;
+    width:200px;
+    background-color: grey;
+}
+.name{
+    text-align: left;
+    color:black;
+    font-weight: 700;
+    margin:0.5em;
+}
+.price{
+    text-align: left;
+    color:rgb(87, 87, 87);
+    font-weight: 500;
+    margin:0.5em;
+}
+.product{
+    background-color: rgb(235, 235, 235);
+    margin: 1em;
+}

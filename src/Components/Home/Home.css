@@ -1,0 +1,55 @@
+h1{
+    margin:0;
+}
+nav{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    color:white;
+    background-color: #302f4e;
+}
+.hero, .links{
+    display: flex;
+}
+.navbar{
+    margin:0.5em 1em;
+} 
+.hamburger{
+    font-size:1.25em;
+    cursor:pointer;
+    background: none;
+    color:white;
+    border:none;
+}
+.sidebar{
+    position: absolute;
+    transform: translateX(-30em);
+    width:14em;
+    background-color: rgb(176, 176, 176);
+    height:100%;
+}
+.sidebar.open{
+    transform:translateX(0);
+}
+.close{
+    border-radius: 50%;
+    border: .1em black solid;
+    width: 1.5em;
+    height: 1.5em;
+    font-size: 1em;
+    cursor:pointer;
+    position:absolute;
+    right:1em;
+    top:0.7em;
+}
+h3{
+    margin:.5em;
+}
+ul{
+    margin:0.5em;
+    list-style: none;
+    color:blue;
+}
+.category{
+    margin:0.5em 1em;
+}

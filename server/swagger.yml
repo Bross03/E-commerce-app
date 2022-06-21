@@ -1,0 +1,284 @@
+openapi: 3.0.1
+info:
+  title: 'E-commerce App (REST API) '
+  version: 1.0.0
+  description: >-
+    A simple e-commerce APi that allows user to perform several CRUD operations
+    in a simulated e-commerce website
+paths:
+  /orders:
+    summary: Retrieves information about orders made
+    description: Gets and updates information about orders made
+    get:
+      summary: Get all orders
+      description: Retrieve an array of orders made
+      operationId: get_orders
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Orders
+  /products:
+    summary: Add, update and read products data
+    description: This path is used to retrieve and add new products
+    get:
+      summary: Get products
+      description: Retrieves an array of all products
+      operationId: get_products
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Products
+    post:
+      summary: Adds New Product
+      description: Posts new product in the database
+      operationId: post_product
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Products
+  /products/{id}:
+    summary: Update and get specific products
+    description: >-
+      This path is used to retrieve or update information of a product with a
+      specific id
+    get:
+      summary: Get product by id
+      description: Retrieve a specific product by id
+      operationId: get_product_id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the product to get
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Products
+    put:
+      summary: Updates product
+      description: Updates a product at a specific id
+      operationId: put_product_id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the product to update
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Products
+  /users:
+    summary: Retrieve and alter information on users
+    description: Path is used to access and alter information of the users
+    get:
+      summary: Get all users
+      description: Retrieves an array of all users
+      operationId: get_users
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Users
+  /users/{id}:
+    summary: Get and update users
+    description: Retrieve and update information of users at a specific id
+    get:
+      summary: Get user by id
+      description: Get user information by id
+      operationId: get_user_id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to get
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Users
+    put:
+      summary: Updates user information
+      description: Users are able to update their own information if they are logged in
+      operationId: put_user_id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to update
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Users
+  /user/mine:
+    summary: updates and gets information user
+    description: Updates and gets information of an user that is logged in
+    get:
+      summary: Gets user information
+      description: Retrieves information of the logged in user
+      operationId: get_user_mine
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Users
+    put:
+      summary: Updates user information
+      description: Updates information of a logged in user
+      operationId: put_user_mine
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Users
+  /orders/{id}:
+    summary: Get and update orders
+    description: Retrieve and update information of orders with an specific id
+    get:
+      summary: Get order by id
+      description: Retrieve a specific order's information given a specific id
+      operationId: get_order_id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the order to get
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Orders
+    put:
+      summary: Updates specific order information
+      description: Only the status of the order can be modified
+      operationId: put_order_id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the order to update
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Orders
+  /orders/user/{id}:
+    summary: Retrieve orders from an user
+    description: Gets all orders of an user
+    get:
+      summary: Get all orders of an users
+      description: Retrieves all orders made by an user
+      operationId: get_order_user_id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user's order to get
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Orders
+  /cart:
+    summary: Retrieves information about carts
+    description: Gets information about users' carts
+    post:
+      summary: Post new cart
+      description: >-
+        Users are able to post new carts given they do not have any active carts
+        already
+      operationId: post_cart
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Carts
+  /cart/mine:
+    summary: Get, post and update user's cart
+    description: 'This path is used to handle data of an logged in user''s cart '
+    get:
+      summary: Gets user's cart
+      description: Retrieves information about the logged in user's cart
+      operationId: get_cart_mine
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Carts
+    post:
+      summary: Post items to a cart
+      description: This path allows logged in users to post items into their cart
+      operationId: post_cart_mine
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Carts
+  /cart/mine/checkout:
+    summary: Checks out an users cart
+    description: Checks out an users cart, creates an order, and deletes cart information
+    post:
+      summary: Checkout user's cart
+      description: >-
+        Creates a new order with the information from the cart and deletes cart
+        from the user
+      operationId: post_cart_checkout
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Carts
+  /auth/register:
+    summary: Register users
+    description: Path is used to register new users
+    post:
+      summary: Post new user
+      description: Registers new user
+      operationId: post_register
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Auth
+  /auth/login:
+    summary: Logs in a user
+    description: User uses this path to log into the application
+    post:
+      summary: Log in user
+      description: Logs in a user into the application
+      operationId: auth_login
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Auth
+  /auth/logout:
+    summary: Logs out users
+    get:
+      summary: Logs out user
+      description: Used to log out users from the application
+      operationId: get_logout
+      responses:
+        default:
+          description: Default error sample response
+      tags:
+        - Auth

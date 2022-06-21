@@ -1,0 +1,32 @@
+{
+  "name": "e-commerce_rest_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "db.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bross03/E-commerce-REST-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bross03/E-commerce-REST-API/issues"
+  },
+  "homepage": "https://github.com/Bross03/E-commerce-REST-API#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "helmet": "^5.1.0",
+    "moment": "^2.29.3",
+    "passport": "^0.5.3",
+    "passport-local": "^1.0.0",
+    "pg-promise": "^10.11.1"
+  }
+}

@@ -1,0 +1,77 @@
+.signUpPage{
+    background-color: rgb(17, 194, 194);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    height:100vh;
+  
+}
+.signUpCard{
+    width: 350px;
+    background-color: white;
+    min-height: 350px;
+    height:50%;
+}
+.signupForm{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1em;
+    height:70%;
+}
+.title{
+    padding: 1em;
+}
+h2{
+    margin:0 0 0.3em 0;
+}
+.formDescription{
+    color:grey;
+}
+.name{
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+}
+.firstName, .lastName{
+    width: 45%;
+ 
+}
+input{
+    width: 100%;
+    height: 2.5em;
+}
+.submitButton {
+    border-color: aqua;
+    background-image: -webkit-linear-gradient(45deg, aqua 50%, transparent 50%);
+    background-image: linear-gradient(45deg, aqua 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: 600ms ease-in-out;
+    transition: 600ms ease-in-out;
+    border-radius: 1em;
+    padding:0.7em;
+    width:10em;
+}
+
+.submitButton:hover {
+    background-position: 0;
+    color: white;
+}
+.login{
+    color:white;
+    margin:0.2em;
+}
+.loginLink{
+    color:white;
+}
+.message.active{
+    background-color: red;
+    padding:0.5em 2em;
+    margin:1em;
+    color:white;
+    border-radius:1em;
+}
