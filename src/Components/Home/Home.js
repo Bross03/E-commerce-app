@@ -5,18 +5,18 @@ import { fetchProducts } from "../../Api/product";
 import Products from "../Products/Products";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../store/auth/authActions";
+import { loadProductList } from "../../store/products/productActions";
 
 function Home(props){
 
     const dispatch=useDispatch();
-    const [products, setProducts]=useState([]);
+   // const [products, setProducts]=useState([]);
     const [category,setCategory]=useState('All Products');
     const {isAuthenticated, user}= useSelector(state=>state.auth)
-
+    const {products}=useSelector(state=>state.products);
     useEffect(()=>{
         async function load(){
-        const data= await fetchProducts();
-        setProducts(data);
+        await dispatch(loadProductList());
         }
         load();
         return ()=>{
