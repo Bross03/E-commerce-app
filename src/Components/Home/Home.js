@@ -34,34 +34,7 @@ function Home(props){
     }
     return(
         <div>
-            {/* <nav>
-                <div className="hero">
-                    <button className="navbar hamburger" onClick={toggleMenu}>
-                        &#9776;
-                    </button>
-                    <h2 className="navbar logo">Nile.com</h2>
-                </div>
-                {
-                    isAuthenticated ? 
-                <div className="action links">
-                    <div className="profile" onClick={toggleProfileMenu}>
-                        <h3>Hello {user.first_name}</h3>
-                    </div>
-                    <div className="dropMenu">
-                        <ul>
-                            <li><img src="" /><Link to='/cart' className="dropMenuLink">My cart</Link></li>
-                            <li><img src="" /><Link to='/orders' className="dropMenuLink">My orders</Link></li>
-                            <li><img src="" /><Link to='/' className="dropMenuLink" onClick={handleLogout}>Logout</Link></li>
-                        </ul>
-                    </div>
-                </div>
-                :
-                <div className="links">
-                    <Link to="/login" className="navbar signinLink">Log in</Link>
-                    <Link to='/signup' className="navbar signupLink">Sign up</Link>
-                </div>
-                }
-            </nav> */}
+            
             <div className="mainPage">
                 <aside className="sidebar">
                     <h3>Categories</h3>

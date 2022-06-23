@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { checkLoginStatus } from "../../store/auth/authActions";
 
 import { login, register } from "../../Api/auth";
+import { loadCart } from "../../Api/cart";
+import { createCart } from "../../store/cart/cartActions";
 
 function Signup(){
 
@@ -80,7 +82,8 @@ function Signup(){
             await register(data);
             await login(loginData);
             await dispatch(checkLoginStatus());
-            
+            await dispatch(createCart());
+
             setEmail('');
             setConfirmPassword('');
             setPassword('');

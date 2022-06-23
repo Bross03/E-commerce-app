@@ -17,39 +17,6 @@ export const checkLoginStatus = createAsyncThunk(
   }
 );
 
-// export const loginUser = createAsyncThunk(
-//   'auth/loginUser',
-//   async (data, thunkAPI) => {
-//     try {
-//       const response = await login(data);
-//       return {
-//         user: response.data,
-//         isAuthenticated: true
-//       }
-//     } catch(err) {
-//       throw err;
-//     }
-//   }
-// );
-
-// export const registerUser = createAsyncThunk(
-//   'auth/registerUser',
-//   async (data, thunkAPI) => {
-//     try {
-//       const response= await register(data);
-//       console.log(response);
-//       return {
-//         user: response,
-//         isAuthenticated:true
-//       };
-//     } catch(err) {
-//       console.log(err);
-//       throw err;
-//     }
-    
-    
-//   }
-// );
 
 export const logoutUser = createAsyncThunk(
   'auth/logoutUser',

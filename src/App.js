@@ -8,6 +8,7 @@ import Login from './Components/Login/Login';
 import ProductInfo from './Components/ProductInfo/ProductInfo';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from './store/auth/authActions';
+import Cart from './Components/Cart/Cart';
 
 function App() {
     const location=useLocation();
@@ -72,8 +73,8 @@ function App() {
             <Route exact path="/signup" element={<Signup/>}/>
             <Route exact path="/login" element={<Login/>}/>
             <Route exact path='/' element={<Home/>}/>
-            <Route path='products/:productId' element={<ProductInfo/>}/>
-            
+            <Route exact path='products/:productId' element={<ProductInfo/>}/>
+            <Route exact path='/cart' element={<Cart/>}/>
           </Routes>
         </body>
       </div>
