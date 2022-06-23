@@ -59,8 +59,8 @@ function Login(){
             <span className="message"></span>
             <div className="loginCard">
             <div className="title">
-            <h2>Sign Up</h2>
-            <p className="loginFormDescription">Fill in this form to login</p>
+            <h2>Log In</h2>
+            <p className="loginFormDescription">Fill in this form to log in</p>
             </div>    
                 <form className="loginForm" onSubmit={onSubmitLogin}>
                     

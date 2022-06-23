@@ -1,6 +1,6 @@
 import "./ProductInfo.css";
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadProductList, selectActiveProduct } from "../../store/products/productActions";
 
@@ -8,6 +8,7 @@ function ProductInfo(){
     const {productId}=useParams();
     const dispatch=useDispatch();
     const {productSelected, products}=useSelector(state=>state.products);
+    const {isAuthenticated}=useSelector(state=>state.auth);
     useEffect(()=>{
         async function loadProduct(){
             if(products.length==0){
@@ -48,13 +49,24 @@ function ProductInfo(){
                                 <li>Category: <span>also find something on db</span></li>
                             </ul>
                         </div>
-                        <p>SOME FORM OF CHECK IF USER IS LOGGED IN IS NECESSARY</p>
-                        <form className="addToCart">
-                            <label to="quantity">Quantity</label>
-                            <input type="number" min="0" value="1" id="quantity"></input>
-                            <button type="submit">Add to cart</button>
-                        </form>
-
+                        {
+                           isAuthenticated ?
+                            <form className="addToCart">
+                                <label to="quantity">Quantity</label>
+                                <input type="number" min="0" value="1" id="quantity"></input>
+                                <button type="submit">Add to cart</button>
+                            </form>
+                            :
+                            (
+                            <div className="mustLogin">
+                                <h4>You must be logged in to add items to your cart</h4>
+                                <div className="linksProductInfo">
+                                    <Link to='/signup' className="signupLink">Sign Up</Link>
+                                    <Link to='/login' className="loginLink">Log In</Link>
+                                </div>
+                            </div>
+                            )
+                        }
                     </div>
                  </div>
                  )

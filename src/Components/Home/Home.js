@@ -12,7 +12,6 @@ function Home(props){
     const dispatch=useDispatch();
    // const [products, setProducts]=useState([]);
     const [category,setCategory]=useState('All Products');
-    const {isAuthenticated, user}= useSelector(state=>state.auth)
     const {products}=useSelector(state=>state.products);
     useEffect(()=>{
         async function load(){
@@ -23,35 +22,19 @@ function Home(props){
 
         };
     },[]);
-    
-    const toggleProfileMenu=()=>{
-        const toggleProfileDropMenu=document.querySelector('.dropMenu');
-        toggleProfileDropMenu.classList.toggle('active');
-    }
+
     const toggleMenu=()=>{
         const sidebar= document.querySelector(".sidebar");
-        if(sidebar.classList.contains("open")){
-            sidebar.classList.remove("open")
-        }else{
-        sidebar.classList.add("open")
-        }
+        sidebar.classList.toggle('open');
     }
     const changeCategory=(e)=>{
         const newCategory=e.target.innerText;
         setCategory(newCategory);
         toggleMenu();
     }
-    const handleLogout=async ()=>{
-        try{
-        await dispatch(logoutUser());
-        toggleProfileMenu();
-        }catch(err){
-            return err;
-        }
-    }
     return(
         <div>
-            <nav>
+            {/* <nav>
                 <div className="hero">
                     <button className="navbar hamburger" onClick={toggleMenu}>
                         &#9776;
@@ -78,7 +61,7 @@ function Home(props){
                     <Link to='/signup' className="navbar signupLink">Sign up</Link>
                 </div>
                 }
-            </nav>
+            </nav> */}
             <div className="mainPage">
                 <aside className="sidebar">
                     <h3>Categories</h3>

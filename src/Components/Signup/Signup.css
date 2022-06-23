@@ -6,7 +6,8 @@
     align-items: center;
     background-size: cover;
     height:100vh;
-  
+    top:2.6em;
+    width:100%;
 }
 .signUpCard{
     width: 350px;

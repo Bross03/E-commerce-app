@@ -4,6 +4,9 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
+    position:absolute;
+    top:2.6em;
+    width:100%;
 }
 .imageInfo{
     margin:1em;
@@ -13,7 +16,6 @@
 }
 .descrpition{
     margin:1em;
-    
     width:500px;
 }
 .productTitle{
@@ -46,8 +48,17 @@
     color:black;
     margin:0.5em 1em 0.5em 0;
     border: 1px black solid;
-    padding:0.5em;
-    border-radius: 34em;
+    text-align: center;
+    border-radius: 3em;
+    height:3em;
+    line-height: 3em;
+    width:3em;
+    cursor: pointer;
+    transition:0.3s;
+}
+.productDetails .size ul li:hover{
+    background-color: #302f4e;
+    color:white
 }
 .productDetailList{
     margin:1em 0;
@@ -63,20 +74,38 @@
 }
 .addToCart{
     display:flex;
+    align-items: center;
 }
 .addToCart input, .addToCart button{
     border:1.5px solid black;
     border-radius:25px;
     text-align: center;
     padding:0.5em;
-    margin-right:1em;
+    margin:1em 1em;
 
 }
 .addToCart input{
-    width:5em;
+    line-height: 3em;
+    height:3em;
+    width:3em;
 }
 .addToCart button{
+    display: flex;
+    align-items: center;
+    line-height: 3em;
+    height:3em;
     cursor:pointer;
     color:black;
     background-color:lightseagreen;
+}
+.linksProductInfo{
+    margin: 1em 0;
+}
+.linksProductInfo .signupLink, .linksProductInfo .loginLink{
+    color:black;
+    margin:0 1.5em 0 0;
+    width:1em;
+    background-color: aqua;
+    padding:0.5em;
+    border-radius: 2em;
 }
