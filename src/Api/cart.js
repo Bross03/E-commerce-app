@@ -20,3 +20,29 @@ export const loadCart=async ()=>{
         throw err.response.data;
     }
 }
+export const findCartById=async()=>{
+    try{
+        const response=await API.get('cart/mine');
+        console.log(response);
+        return response.data[0];
+    }catch(err){
+        throw err.response.data;
+    }
+}
+export const getItemsOfUsersCart=async()=>{
+    try{
+        const response=await API.get('cart/mine/items');
+        console.log(response);
+        return response.data;
+    }catch(err){
+        throw err.response.data;
+    }
+}
+export const addItemToCart=async(data)=>{
+    try{
+        const response=await API.post('cart/mine',data);
+        return response.data[0];
+    }catch(err){
+        throw err.response.data;
+    }
+}

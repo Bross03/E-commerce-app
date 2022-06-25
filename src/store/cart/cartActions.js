@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { loadCart } from '../../Api/cart';
+import { findCartById, getItemsOfUsersCart, loadCart } from '../../Api/cart';
 
 // export const addItemToCart = createAsyncThunk(
 //     'cart/addItem',
@@ -33,3 +33,35 @@ import { loadCart } from '../../Api/cart';
       }
     }
   );
+  export const findUserCart = createAsyncThunk(
+    'cart/findCart',
+    async (params, thunkAPI) => {
+      try {
+        const cart = await findCartById();
+        const cartItems = await getItemsOfUsersCart();
+        return {
+          cart:cart,
+          isAuthenticated: true,
+          cartItems:cartItems
+        }
+      } catch(err) {
+        throw err;
+      }
+    }
+  );
+  // export const addItemToCart = createAsyncThunk(
+  //   'cart/addToCart',
+  //   async (data, thunkAPI) => {
+  //     try {
+       
+  //       await addItemToCart(data)
+  //       return {
+  //         cart:cart,
+  //         isAuthenticated: true,
+  //         cartItems:cartItems
+  //       }
+  //     } catch(err) {
+  //       throw err;
+  //     }
+  //   }
+  // );

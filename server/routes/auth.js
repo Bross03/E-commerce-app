@@ -42,7 +42,6 @@ module.exports=(app, passport)=>{
             const {username, password}=req.body;
             const response = await authHelperInstance.login({email:username, password});
             if(response){
-                console.log('success');
                 res.status(200).send(response);
             }else{
                 res.status(500).send("Email or password are incorrect");

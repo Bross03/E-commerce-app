@@ -9,10 +9,8 @@ const utilInstance= new util();
 module.exports=class cartHelper{
     
     async findCartById(user_id){
-        const statement=`SELECT created, modified, user_id, name, 
-                        qty, price FROM carts JOIN cart_items ON carts.id=${user_id} 
-                        AND carts.id=cart_items.cart_id JOIN products ON cart_items.product_id=products.id;`;
-        const cart=await dbQuery(statement);
+        const statement2=`SELECT * FROM carts WHERE id=$1`;
+        const cart=await dbQuery(statement2,[user_id]);
         if(cart.rows?.length){
             return cart.rows;
         }
@@ -35,7 +33,16 @@ module.exports=class cartHelper{
         }
         return null;
     };
-
+    async getAllItems(user_id){
+        const products=await dbQuery(`SELECT products.name, products.id, cart_items.id,
+         cart_items.qty,products.price FROM cart_items, products WHERE
+        cart_items.product_id=products.id AND cart_items.cart_id=$1;`,[user_id]);
+        if(products.rows?.length){
+            return products.rows;
+        }else{
+            return false;
+        }
+    }
     async cartHasItem(product_id, user_id){
 
         const product = await dbQuery("SELECT id FROM cart_items WHERE product_id=$1 AND cart_id=$2",[product_id, user_id]);
@@ -47,22 +54,22 @@ module.exports=class cartHelper{
     }
 
     async addItemToCart(data, user_id){
-        const {name,qty} =data;
+        const {productId,qty} =data;
         const id = await utilInstance.createNewId('cart_items');
 
-        const product_id=await productHelperInstance.getProductIdByName(name);
+        //const product_id=await productHelperInstance.getProductIdByName(name);
 
-        const itemExists = await this.cartHasItem(product_id, user_id);
+        const itemExists = await this.cartHasItem(productId, user_id);
 
 
         if(!itemExists){
             const cart_item ={
                 "id":id,
-                "product_id":product_id,
+                "product_id":productId,
                 "cart_id":user_id,
                 "qty": qty
             };
-            if(!id || ! product_id || !user_id ||!qty){
+            if(!id || ! productId || !user_id ||!qty){
                 return null;
             };
 

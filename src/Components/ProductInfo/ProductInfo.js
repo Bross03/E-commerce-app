@@ -1,14 +1,23 @@
 import "./ProductInfo.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadProductList, selectActiveProduct } from "../../store/products/productActions";
+import { findUserCart } from "../../store/cart/cartActions";
+import { addItemToCart } from "../../Api/cart";
 
 function ProductInfo(){
     const {productId}=useParams();
     const dispatch=useDispatch();
     const {productSelected, products}=useSelector(state=>state.products);
     const {isAuthenticated}=useSelector(state=>state.auth);
+    const [quantity,setQuantity]=useState(1);
+
+    const data={
+        productId:productId,
+        qty: quantity
+    };
+
     useEffect(()=>{
         async function loadProduct(){
             if(products.length==0){
@@ -19,6 +28,18 @@ function ProductInfo(){
         loadProduct();
     },[productId])
 
+    const handleSubmit=async (e)=>{
+        e.preventDefault();
+        try{
+        if(data.productId && data.qty){
+            console.log('aaaaaaaaaaaaaaa')
+            await addItemToCart(data);
+        }
+        await dispatch(findUserCart());
+        }catch(err){
+            console.log(err);
+        }
+    }
 
     return(
         <div>
@@ -51,9 +72,9 @@ function ProductInfo(){
                         </div>
                         {
                            isAuthenticated ?
-                            <form className="addToCart">
+                            <form className="addToCart" onSubmit={handleSubmit}>
                                 <label to="quantity">Quantity</label>
-                                <input type="number" min="0" value="1" id="quantity"></input>
+                                <input type="number" min="0" value={quantity} id="quantity" onChange={(e) => setQuantity(e.target.value)}></input>
                                 <button type="submit">Add to cart</button>
                             </form>
                             :

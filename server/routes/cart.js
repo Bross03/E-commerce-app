@@ -19,7 +19,7 @@ module.exports=(app)=>{
             if(cart){
                 res.send(cart);
             }else{
-                res.status(500).send("cart not found/empty");
+                res.status(500).send("cart not found");
             }
 
         }else{
@@ -27,6 +27,20 @@ module.exports=(app)=>{
         }
 
     });
+
+    //get items from users cart
+    router.get('/mine/items',async (req,res,next)=>{
+        try{
+            if(req.session.passport?.user){
+                const cartItems=await cartHelperInstance.getAllItems(req.session.passport.user);
+                res.send(cartItems);
+            }else{
+                res.status(500).send('You must be logged in to access your cart');
+            }
+        }catch(err){
+
+        }
+    })
 
     //post carts
     router.post('/', async (req,res,next)=>{
@@ -55,6 +69,7 @@ module.exports=(app)=>{
         try{
             if(req.session.passport?.user){
                 const data=req.body;
+                console.log(data);
                 const result = await cartHelperInstance.addItemToCart(data, req.session.passport.user);
                 if(result){
                 res.status(200).send('Item successfully added to the cart');

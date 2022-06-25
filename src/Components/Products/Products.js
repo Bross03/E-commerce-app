@@ -1,7 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { selectActiveProduct } from "../../store/products/productActions";
+import { useSelector } from "react-redux";
 import Product from "../Product/Product";
 import "./Products.css";
 function Products(props){

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createCart } from "./cartActions";
+import { createCart, findUserCart, findUserCartItems } from "./cartActions";
 
 
 const initialState={
@@ -17,6 +17,12 @@ const cartSlice=createSlice({
             const {cart,isAuthenticated}=action.payload;
             state.cart=cart;
             state.isAuthenticated=isAuthenticated;
+        },
+        [findUserCart.fulfilled]:(state,action)=>{
+            const {cart,isAuthenticated,cartItems}=action.payload;
+            state.cart=cart;
+            state.isAuthenticated=isAuthenticated;
+            state.cartItems=cartItems;
         }
     }
 });

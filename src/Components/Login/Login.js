@@ -4,6 +4,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { checkLoginStatus} from "../../store/auth/authActions";
 import { login } from "../../Api/auth";
+import { findUserCart } from "../../store/cart/cartActions";
 
 function Login(){
 
@@ -44,8 +45,10 @@ function Login(){
         }
         
         await login(data);
+        
         await dispatch(checkLoginStatus());
-    
+        await dispatch(findUserCart());
+        
         navigate('/');
             
         }catch(err){
