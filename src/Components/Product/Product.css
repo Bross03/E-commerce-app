@@ -1,6 +1,7 @@
 .image{
-    height:300px;
-    width:200px;
+    
+    width:20em;
+    height:25em;
     background-color: grey;
 }
 .name{

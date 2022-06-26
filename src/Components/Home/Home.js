@@ -8,7 +8,6 @@ import { loadProductList } from "../../store/products/productActions";
 function Home(props){
 
     const dispatch=useDispatch();
-   // const [products, setProducts]=useState([]);
     const [category,setCategory]=useState('All Products');
     const {products}=useSelector(state=>state.products);
     useEffect(()=>{

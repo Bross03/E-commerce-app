@@ -34,7 +34,7 @@ module.exports=class cartHelper{
         return null;
     };
     async getAllItems(user_id){
-        const products=await dbQuery(`SELECT products.name, products.id,
+        const products=await dbQuery(`SELECT products.name, products.id, products.in_stock,
          cart_items.qty,products.price FROM cart_items, products WHERE
         cart_items.product_id=products.id AND cart_items.cart_id=$1;`,[user_id]);
         if(products.rows?.length){

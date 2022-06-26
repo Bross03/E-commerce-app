@@ -14,8 +14,6 @@ module.exports=(app)=>{
         try{
         if(req.query.category){
             const products=await productHelperInstance.getProductsByCategory(req.query.category);
-            console.log('heeeeeeeeeey');
-            console.log(products);
             res.status(200).send(products);
         }else{
             const products= await productHelperInstance.getAllProducts();

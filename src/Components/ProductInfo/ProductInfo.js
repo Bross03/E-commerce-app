@@ -32,7 +32,6 @@ function ProductInfo(){
         e.preventDefault();
         try{
         if(data.productId && data.qty){
-            console.log('aaaaaaaaaaaaaaa')
             await addItemToCart(data);
         }
         await dispatch(findUserCart());
@@ -47,7 +46,7 @@ function ProductInfo(){
                  (productSelected.name) ?
                  (
                  <div className="productInfo">
-                    <div className="imageInfo"></div>
+                    <img src={require(`./../../Images/p${productSelected.id}.jpg`)} alt="product image" className="imageInfo"></img>
                     <div className="descrpition">
                         <h2 className="productTitle">{productSelected.name}</h2>
                         <h4 className="priceInfo">${productSelected.price}</h4>
@@ -74,7 +73,7 @@ function ProductInfo(){
                                 <span className="notInStock"> No</span>
                                 }
                                     </li>
-                                <li>Category: <span>also find something on db</span></li>
+                                <li>Category: <span>{productSelected.category}</span></li>
                             </ul>
                         </div>
                         {

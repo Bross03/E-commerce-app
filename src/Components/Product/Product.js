@@ -3,23 +3,17 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { selectActiveProduct } from "../../store/products/productActions";
 import "./Product.css";
+//import Image from "./../../public/images";
 
 function Product(props){
     const {data}=props;
 
-    const navigate=useNavigate();
-    const dispatch=useDispatch();
-    //const {products}=useSelector(state=>state.products);
-    const selectProduct=async (productId)=>{
-        //await dispatch(selectActiveProduct(productId));
-        console.log('aaaaaaaaaa');
-        //navigate('/productinfo');
-    }
+    
     return(
         <div className="product" >
-            <div className="image">
-
-            </div>
+    
+                <img src={require(`./../../Images/p${data.id}.jpg`)} alt="product image" className="image"></img>
+            
             <h4 className="name">
                 {data.name}
             </h4>

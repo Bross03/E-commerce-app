@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../Api/cart";
 import { findUserCart } from "../../store/cart/cartActions";
@@ -7,6 +7,11 @@ import './CartItem.css';
 function CartItem(props){
     const product=props.item;
     const dispatch=useDispatch();
+    const [inStock,setInStock]=useState(product.in_stock-product.qty)
+ 
+    useEffect(()=>{
+        setInStock(product.in_stock-product.qty);
+    },[product.qty]);
 
     const addItem=async (e)=>{
         e.preventDefault();
@@ -37,10 +42,17 @@ function CartItem(props){
     }
     return(
         <div className="cartItem">
-            <div className="imageCartItem"></div>
+            <img src={require(`./../../Images/p${product.id}.jpg`)} alt="product image" className="imageCartItem"></img>
             <div className="aboutCartItem">
                 <h2 className="titleCartItem">{product.name}:</h2>
-                <p className="subtitleCartItem">In stock: <span>Yes</span></p>
+                <p className="subtitleCartItem">In stock: 
+                {
+                inStock>=0?
+                <span className="inStock"> Yes</span>
+                :
+                <span className="notInStock"> No</span>
+                }
+                </p>
             </div>
             <div className="counterCartItem">
                 <div className="counterBtn" onClick={addItem}>+</div>

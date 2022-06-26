@@ -24,9 +24,19 @@
     color:grey;
     
 }
+
 .subtitleCartItem span{
-    color:chartreuse
+    font-size: 1.1em;
+    font-weight: 650;
 }
+.subtitleCartItem span .inStock{
+    color:green
+}
+
+.subtitleCartItem span .notInStock{
+    color:rgb(235, 57, 57);
+}
+
 .counterCartItem{
     width:15%;
     display: flex;
