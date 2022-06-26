@@ -56,9 +56,9 @@ function App() {
                     </div>
                     <div className="dropMenu">
                         <ul>
-                            <li><img src="" /><Link to='/cart' className="dropMenuLink">My cart</Link></li>
-                            <li><img src="" /><Link to='/orders' className="dropMenuLink">My orders</Link></li>
-                            <li><img src="" /><Link to='/' className="dropMenuLink" onClick={handleLogout}>Logout</Link></li>
+                            <li onClick={toggleProfileMenu}><img src="" /><Link to='/cart' className="dropMenuLink">My cart</Link></li>
+                            <li onClick={toggleProfileMenu}><img src="" /><Link to='/orders' className="dropMenuLink">My orders</Link></li>
+                            <li onClick={toggleProfileMenu}><img src="" /><Link to='/' className="dropMenuLink" onClick={handleLogout}>Logout</Link></li>
                         </ul>
                     </div>
                 </div>

@@ -77,4 +77,17 @@ module.exports=class productHelper{
             return err;
         }
     }
+    async getProductsByCategory(category){
+        try{
+            const statement=`SELECT * FROM products WHERE category LIKE $1;`;
+            const products= await dbQuery(statement,[`%${category}%`]);
+            if(products.rows?.length){
+                return products.rows;
+            }else{
+                return null;
+            }
+        }catch(err){
+            return err;
+        }
+    }
 }

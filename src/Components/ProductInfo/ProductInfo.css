@@ -67,10 +67,17 @@
     margin:0.5em 0;
     color:black;
     font-weight:600;
+    font-size: 1.2em;
 }
 .productDetailList li span{
-    font-weight: 400;
-    color:grey;
+    font-weight: 800;
+    
+}
+.notInStock{
+    color:rgb(235, 57, 57);
+}
+.inStock{
+    color:green;
 }
 .addToCart{
     display:flex;

@@ -66,7 +66,14 @@ function ProductInfo(){
                                 </ul>
                             </div>
                             <ul className="productDetailList">
-                                <li>In stock: <span>Yes but make something to check on db</span></li>
+                                <li>In stock:
+                                    {
+                                    productSelected.in_stock>0 ? 
+                                    <span className="inStock"> Yes</span>
+                                :
+                                <span className="notInStock"> No</span>
+                                }
+                                    </li>
                                 <li>Category: <span>also find something on db</span></li>
                             </ul>
                         </div>

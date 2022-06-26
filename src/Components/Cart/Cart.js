@@ -38,7 +38,7 @@ function Cart(){
                 <div className="checkout">
                     <div className="total">
                         <h4 className="subtotal">Subtotal</h4>
-                        <div className="totalAmount">{totalPrice}</div>
+                        <div className="totalAmount">${totalPrice}</div>
                     </div>
                     <button className="checkoutBtn">Checkout</button>
                 </div>

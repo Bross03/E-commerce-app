@@ -9,11 +9,20 @@ module.exports=(app)=>{
     //setting up router
     app.use('/api/products', router)
     
-    //get all products 
+    //get all products or product by category
     router.get('/',async (req,res,next)=>{
         try{
-        const products= await productHelperInstance.getAllProducts();
-        res.status(200).send(products);
+        if(req.query.category){
+            const products=await productHelperInstance.getProductsByCategory(req.query.category);
+            console.log('heeeeeeeeeey');
+            console.log(products);
+            res.status(200).send(products);
+        }else{
+            const products= await productHelperInstance.getAllProducts();
+            res.status(200).send(products);
+        }
+        
+
         }catch(err){
             res.status(500).send(err);
         }
