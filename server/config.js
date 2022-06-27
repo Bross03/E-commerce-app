@@ -21,4 +21,5 @@ module.exports = {
     PORT: process.env.SERVER_PORT,
     SESSION_SECRET: process.env.SESSION_SECRET,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+    CLIENT_URL: process.env.CLIENT_URL
   }

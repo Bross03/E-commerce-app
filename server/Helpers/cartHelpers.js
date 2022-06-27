@@ -4,7 +4,7 @@ const moment=require('moment');
 const productHelper=require('./productHelper.js');
 const productHelperInstance=new productHelper();
 const util=require('../util/util.js');
-const { STRIPE_SECRET_KEY } = require('../config.js');
+const { STRIPE_SECRET_KEY, CLIENT_URL } = require('../config.js');
 const utilInstance= new util();
 
 module.exports=class cartHelper{
@@ -120,13 +120,33 @@ module.exports=class cartHelper{
         const result= await dbQuery(statement, [productId,userId]);
         return result;
     };
-    async processPayment(totalPrice, paymentInfo){
+    async formatItemsForStripe(products){
+        //array in the format [{productId:2,qty:3},{productId:3, qty:2}]
+        const productsFormatted=products.map(item=>{
+            const productObject=await productHelperInstance.findProductById(item.productId);
+            console.log(productObject);
+            return {
+                price_data: {
+                    currency: 'cad',
+                    product_data: {
+                        name: productObject.name
+                    },
+                    unit_amount: productObject.price * 100
+                },
+                quantity: item.qty
+            }
+        })
+    }
+    async processPayment(totalPrice, paymentInfo, products){
         const stripe=require('stripe')(STRIPE_SECRET_KEY);
+
 
         const session= await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
+            line_items:[],
             mode: 'payment',
-            success_url: `${}`
+            success_url: `${CLIENT_URL}/payment-success`,
+            cancel_url: `${CLIENT_URL}/payment-cancel`
         })
     }
 }   
