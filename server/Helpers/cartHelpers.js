@@ -3,7 +3,8 @@ const pgp = require('pg-promise')({ capSQL: true });
 const moment=require('moment');
 const productHelper=require('./productHelper.js');
 const productHelperInstance=new productHelper();
-const util=require('../util/util.js')
+const util=require('../util/util.js');
+const { STRIPE_SECRET_KEY } = require('../config.js');
 const utilInstance= new util();
 
 module.exports=class cartHelper{
@@ -114,4 +115,18 @@ module.exports=class cartHelper{
         }
         return sum;
     };
-}
+    async deleteProductFromCart(productId, userId){
+        const statement=`DELETE FROM cart_items WHERE product_id=$1 AND cart_id=$2;`;
+        const result= await dbQuery(statement, [productId,userId]);
+        return result;
+    };
+    async processPayment(totalPrice, paymentInfo){
+        const stripe=require('stripe')(STRIPE_SECRET_KEY);
+
+        const session= await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            mode: 'payment',
+            success_url: `${}`
+        })
+    }
+}   

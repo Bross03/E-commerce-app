@@ -69,7 +69,6 @@ module.exports=(app)=>{
         try{
             if(req.session.passport?.user){
                 const data=req.body;
-                console.log(data);
                 const result = await cartHelperInstance.addItemToCart(data, req.session.passport.user);
                 if(result){
                 res.status(200).send('Item successfully added to the cart');
@@ -98,6 +97,7 @@ module.exports=(app)=>{
                     if(totalPrice==0){
                         res.status(500).send("Cart is empty");
                     }else{
+                        
                         const newOrder=await orderHelperInstance.createOrder(totalPrice, req.session.passport.user);
                     
                         //delete cart and items
@@ -112,6 +112,24 @@ module.exports=(app)=>{
             }
         }catch(err){
             res.status(500).send(err)
+        }
+    });
+
+    router.delete('/mine/:productId',async (req,res,next)=>{
+        try{
+            if(req.session.passport?.user){
+                const result = await cartHelperInstance.deleteProductFromCart(req.params.productId, req.session.passport.user);
+                
+                if(result){
+                res.status(200).send('Item successfully deleted from the cart');
+                }else{
+                    res.status(404).send('Bad Request');
+                }
+            }else{
+                res.status(500).send('You must be logged in to delete items from your cart')
+            }
+        }catch(err){
+            res.status(500).send(err);
         }
     })
 

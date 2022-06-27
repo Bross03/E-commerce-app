@@ -46,3 +46,11 @@ export const addItemToCart=async(data)=>{
         throw err.response.data;
     }
 }
+export const deleteItemFromCart=async(data)=>{
+    try{
+        const response=await API.delete(`cart/mine/${data.productId}`);
+        return response.data[0];
+    }catch(err){
+        throw err.response.data;
+    }
+}

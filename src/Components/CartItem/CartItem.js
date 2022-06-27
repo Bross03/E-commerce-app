@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addItemToCart } from "../../Api/cart";
+import { useNavigate } from "react-router-dom";
+import { addItemToCart, deleteItemFromCart } from "../../Api/cart";
 import { findUserCart } from "../../store/cart/cartActions";
 import './CartItem.css';
 
@@ -8,7 +9,8 @@ function CartItem(props){
     const product=props.item;
     const dispatch=useDispatch();
     const [inStock,setInStock]=useState(product.in_stock-product.qty)
- 
+    const navigate=useNavigate();
+    
     useEffect(()=>{
         setInStock(product.in_stock-product.qty);
     },[product.qty]);
@@ -29,12 +31,33 @@ function CartItem(props){
     const removeItem=async (e)=>{
         e.preventDefault();
         try{
+            if(product.qty>1){
             const data={
                 productId:product.id,
                 qty:-1
             }
             console.log(data);
             await addItemToCart(data);
+            }else{
+                const data={
+                    productId:product.id
+                }
+                await deleteItemFromCart(data);
+            }
+            await dispatch(findUserCart());
+        
+        }catch(err){
+            console.log(err);
+        }
+    }
+    const deleteItem=async(e)=>{
+        e.preventDefault();
+        try{
+            const data={
+                productId:product.id
+            }
+            console.log(data);
+            await deleteItemFromCart(data);
             await dispatch(findUserCart());
         }catch(err){
             console.log(err);
@@ -61,7 +84,7 @@ function CartItem(props){
             </div>
             <div className="priceCartItem">
                 <p className="amountCartItem">${product.price}</p>
-                <p className="removeCartItem">Remove</p>
+                <p className="removeCartItem" onClick={deleteItem}>Remove</p>
             </div>
         </div>
     )

@@ -49,19 +49,4 @@ import { findCartById, getItemsOfUsersCart, loadCart } from '../../Api/cart';
       }
     }
   );
-  // export const addItemToCart = createAsyncThunk(
-  //   'cart/addToCart',
-  //   async (data, thunkAPI) => {
-  //     try {
-       
-  //       await addItemToCart(data)
-  //       return {
-  //         cart:cart,
-  //         isAuthenticated: true,
-  //         cartItems:cartItems
-  //       }
-  //     } catch(err) {
-  //       throw err;
-  //     }
-  //   }
-  // );
+ 

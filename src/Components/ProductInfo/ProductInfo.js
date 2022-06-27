@@ -1,6 +1,6 @@
 import "./ProductInfo.css";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadProductList, selectActiveProduct } from "../../store/products/productActions";
 import { findUserCart } from "../../store/cart/cartActions";
@@ -12,6 +12,7 @@ function ProductInfo(){
     const {productSelected, products}=useSelector(state=>state.products);
     const {isAuthenticated}=useSelector(state=>state.auth);
     const [quantity,setQuantity]=useState(1);
+    const navigate=useNavigate();
 
     const data={
         productId:productId,
@@ -35,6 +36,7 @@ function ProductInfo(){
             await addItemToCart(data);
         }
         await dispatch(findUserCart());
+        navigate('/cart');
         }catch(err){
             console.log(err);
         }

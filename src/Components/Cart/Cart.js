@@ -9,11 +9,22 @@ function Cart(){
     const [totalPrice,setTotalPrice]=useState(0);
     useEffect(()=>{
         let price=0;
-        cartItems.forEach(item => {
-            price=price+(item.price*item.qty);
-        });
-        setTotalPrice(price);
-    },cartItems)
+        if(cartItems.length){
+            cartItems.forEach(item => {
+                price=price+(item.price*item.qty);
+            });
+            setTotalPrice(price);
+        }
+    },[cartItems]);
+
+    const handleCheckout=(e)=>{
+        e.preventDefault();
+        try{
+
+        }catch(err){
+            
+        }
+    }
     return (
         
         <div className="cartPage">
@@ -23,24 +34,28 @@ function Cart(){
                 
                 <h3 className="cartHeading">Your cart</h3>
                 {
-                    cartItems.length ?
+                    cartItems.length ? (
                 <div className="cartItems">
                     {cartItems.map((cartItem)=>{
                         return <CartItem item={cartItem} key={cartItem.id}/>
                     })}
                 </div>
+                    )
                 :
+                (
                 <div className="cartEmptyContainer">
                 <h2 className="cartEmpty">Your cart is empty</h2>
                 <Link to="/" className="homePage">Find Products</Link>
                 </div>
+                
+                )
                 }
                 <div className="checkout">
                     <div className="total">
                         <h4 className="subtotal">Subtotal</h4>
                         <div className="totalAmount">${totalPrice}</div>
                     </div>
-                    <button className="checkoutBtn">Checkout</button>
+                    <button className="checkoutBtn" onClick={handleCheckout}>Checkout</button>
                 </div>
             </div>
             :
