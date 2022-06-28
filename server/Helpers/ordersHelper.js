@@ -26,8 +26,7 @@ module.exports=class orderHelper{
             const newOrder=await dbQuery('SELECT * FROM orders WHERE id=$1',[newOrderId]);
             
             await this.createOrderItems(user_id,newOrderId.toString());
-         
-            return newOrder.rows?.length;
+            return newOrder.rows[0];
 
         }catch(err){
             return err;

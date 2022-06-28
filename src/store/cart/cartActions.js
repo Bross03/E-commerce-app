@@ -1,23 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { findCartById, getItemsOfUsersCart, loadCart } from '../../Api/cart';
+import { checkout, findCartById, getItemsOfUsersCart, loadCart } from '../../Api/cart';
 
-// export const addItemToCart = createAsyncThunk(
-//     'cart/addItem',
-//     async (data, thunkAPI) => {
-//       try {
-//         const {productId, quantity}=data;
 
-//         const response = await isLoggedIn();
-  
-//         return {
-//           isAuthenticated: true,
-//           user: response.data.user
-//         }
-//       } catch(err) {
-//         throw err;
-//       }
-//     }
-//   );
   export const createCart = createAsyncThunk(
     'cart/loadCart',
     async (param, thunkAPI) => {
@@ -48,5 +32,29 @@ import { findCartById, getItemsOfUsersCart, loadCart } from '../../Api/cart';
         throw err;
       }
     }
-  );
- 
+    );
+    export const checkoutCart = createAsyncThunk(
+      'cart/checkoutCart',
+      async ({ cartId, paymentInfo }, thunkAPI) => {
+        try {
+          const response = await checkout(cartId, paymentInfo);
+          return {
+            order: response
+          }
+        } catch(err) {
+          throw err;
+        }
+      }
+    );
+    export const retrieveStripeSessionId= createAsyncThunk(
+      'cart/stripeSessionId',
+      async(id,thunkAPI)=>{
+        try{
+          return {
+            stripeSessionId:id
+          }
+        }catch(err){
+          throw err;
+        }
+      }
+    )

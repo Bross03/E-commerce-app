@@ -4,7 +4,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { checkLoginStatus} from "../../store/auth/authActions";
 import { login } from "../../Api/auth";
-import { findUserCart } from "../../store/cart/cartActions";
+import { createCart, findUserCart } from "../../store/cart/cartActions";
 
 function Login(){
 
@@ -47,12 +47,14 @@ function Login(){
         await login(data);
         
         await dispatch(checkLoginStatus());
+        await dispatch(createCart());
         await dispatch(findUserCart());
         
         navigate('/');
             
         }catch(err){
-            console.log(err);
+            console.log('heyyyyyy')
+            console.log(err.message);
             message.classList.add('active');
             message.innerHTML='Email or password are incorrect';
         }

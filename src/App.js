@@ -1,14 +1,19 @@
 
 import './App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import Signup from './Components/Signup/Signup';
 import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
 import ProductInfo from './Components/ProductInfo/ProductInfo';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser } from './store/auth/authActions';
+import { checkLoginStatus, logoutUser } from './store/auth/authActions';
 import Cart from './Components/Cart/Cart';
+import PaymentSuccess from './Components/PaymentSuccess/PaymentSuccess';
+import { createCart } from './store/cart/cartActions';
+import { findCartById } from './Api/cart';
+import Checkout from './Components/Checkout/Checkout';
+import Orders from './Components/Orders/Orders';
 
 function App() {
     const location=useLocation();
@@ -25,6 +30,16 @@ function App() {
           return err;
       }
   }
+  useEffect(() => {
+    async function isLoggedIn() {
+      await dispatch(checkLoginStatus());
+      await dispatch(createCart());
+      await dispatch(findCartById());
+    }
+
+     isLoggedIn();
+  }, [dispatch]);
+
   const toggleProfileMenu=()=>{
     const toggleProfileDropMenu=document.querySelector('.dropMenu');
     toggleProfileDropMenu.classList.toggle('active');
@@ -75,6 +90,9 @@ function App() {
             <Route exact path='/' element={<Home/>}/>
             <Route exact path='products/:productId' element={<ProductInfo/>}/>
             <Route exact path='/cart' element={<Cart/>}/>
+            <Route exact path='/checkout' element={<Checkout/>}/>
+            <Route exact path='/orders' element={<Orders/>}/>
+            <Route exact path='/paymentSuccess' element={<PaymentSuccess/>}/>
           </Routes>
         </body>
       </div>

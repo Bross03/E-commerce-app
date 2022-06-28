@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { checkout } from "../../Api/cart";
+import { checkoutCart, retrieveStripeSessionId } from "../../store/cart/cartActions";
 import CartItem from "../CartItem/CartItem";
 import './Cart.css';
 
 function Cart(){
     const {cartItems, isAuthenticated}=useSelector(state=>state.cart);
     const [totalPrice,setTotalPrice]=useState(0);
+    const dispatch=useDispatch();
+
     useEffect(()=>{
         let price=0;
         if(cartItems.length){
@@ -17,12 +21,23 @@ function Cart(){
         }
     },[cartItems]);
 
-    const handleCheckout=(e)=>{
+    const handleCheckout=async (e)=>{
         e.preventDefault();
         try{
-
-        }catch(err){
+            const data=[];
+            cartItems.forEach(item=>{
+                data.push({productId:item.id,
+                    qty:item.qty})
+            });
             
+            const session= await checkout(data);
+            console.log('continuing here')
+            console.log(session);
+            await dispatch(retrieveStripeSessionId(session.id));
+            //window.location=session.url;
+        }catch(err){
+            console.log('error thrown')
+            console.log(err);
         }
     }
     return (
@@ -55,7 +70,7 @@ function Cart(){
                         <h4 className="subtotal">Subtotal</h4>
                         <div className="totalAmount">${totalPrice}</div>
                     </div>
-                    <button className="checkoutBtn" onClick={handleCheckout}>Checkout</button>
+                    <Link className="checkoutBtn" to="/checkout" >Checkout</Link>
                 </div>
             </div>
             :

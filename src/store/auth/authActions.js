@@ -1,11 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { isLoggedIn, logout } from '../../Api/auth.js';
 
+
 export const checkLoginStatus = createAsyncThunk(
   'auth/checkLogin',
   async (param, thunkAPI) => {
     try {
       const response = await isLoggedIn();
+      
 
       return {
         isAuthenticated: true,

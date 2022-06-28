@@ -3,12 +3,15 @@ const pgp = require('pg-promise')({ capSQL: true });
 const moment=require('moment');
 const productHelper=require('./productHelper.js');
 const productHelperInstance=new productHelper();
+const orderHelper=require('./ordersHelper.js');
+const orderHelperInstance=new orderHelper();
 const util=require('../util/util.js');
 const { STRIPE_SECRET_KEY, CLIENT_URL } = require('../config.js');
 const utilInstance= new util();
 
 module.exports=class cartHelper{
-    
+
+
     async findCartById(user_id){
         const statement2=`SELECT * FROM carts WHERE id=$1`;
         const cart=await dbQuery(statement2,[user_id]);
@@ -120,33 +123,62 @@ module.exports=class cartHelper{
         const result= await dbQuery(statement, [productId,userId]);
         return result;
     };
-    async formatItemsForStripe(products){
-        //array in the format [{productId:2,qty:3},{productId:3, qty:2}]
-        const productsFormatted=products.map(item=>{
-            const productObject=await productHelperInstance.findProductById(item.productId);
-            console.log(productObject);
-            return {
-                price_data: {
-                    currency: 'cad',
-                    product_data: {
-                        name: productObject.name
-                    },
-                    unit_amount: productObject.price * 100
-                },
-                quantity: item.qty
-            }
-        })
-    }
-    async processPayment(totalPrice, paymentInfo, products){
-        const stripe=require('stripe')(STRIPE_SECRET_KEY);
-
-
-        const session= await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
-            line_items:[],
-            mode: 'payment',
-            success_url: `${CLIENT_URL}/payment-success`,
-            cancel_url: `${CLIENT_URL}/payment-cancel`
-        })
+    //  async formatItemsForStripe(products){
+    //     //array in the format [{productId:2,qty:3},{productId:3, qty:2}]
+    //     const productsFormatted=[]
+    //     for(let i=0;i<products.length;i++){
+    //         const productObject=await productHelperInstance.findProductById(products[i].productId);
+    //         console.log(productObject);
+    //         productsFormatted.push({
+    //             price_data: {
+    //                 currency: 'usd',
+    //                 product_data: {
+    //                     name: productObject.name
+    //                 },
+    //                 unit_amount: (parseInt(productObject.price) * 100)
+    //             },
+    //             quantity: products[i].qty
+    //         });
+    //     }
+    //    console.log(productsFormatted);
+    //    console.log(productsFormatted[0].price_data.product_data);
+    //     return productsFormatted;
+    // }
+    // async processPayment(products){
+    //     try{
+    //     const stripe = require("stripe")(STRIPE_SECRET_KEY);
+    //     const items=await this.formatItemsForStripe(products);
+    //     const session = await stripe.checkout.sessions.create({
+    //         payment_method_types: ['card'],
+    //         mode: 'payment',
+    //         line_items: items,
+    //         success_url: `${CLIENT_URL}/payment-success`,
+    //         cancel_url: `${CLIENT_URL}/payment-cancel`
+    //     });
+    //     console.log(session);
+    //     return session;
+    //     }catch(error){
+    //         console.log(error);
+    //     }
+    // }
+    async checkout(cartId, userId, paymentInfo){
+        try{
+        const stripe = require("stripe")(STRIPE_SECRET_KEY);
+        const totalPrice=await this.getTotalCartPrice(userId);
+        
+        const newOrder=await orderHelperInstance.createOrder(totalPrice,userId);
+        await stripe.charges.create({
+            amount: totalPrice,
+            currency: 'usd',
+            source: paymentInfo.id,
+            description: 'Nile.com charge'
+          });
+          
+        const order=await orderHelperInstance.updateOrder('Completed',newOrder.id);
+        await orderHelperInstance.deleteCartAndCartItems(userId);
+          return order;
+        }catch(err){
+            throw err;
+        }
     }
 }   

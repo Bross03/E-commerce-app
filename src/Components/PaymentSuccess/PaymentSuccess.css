@@ -1,0 +1,7 @@
+.paymentSuccessPage{
+    position:absolute;
+    top:3em;
+    height:100vh;
+    width:100%;
+    background-color: aqua;
+}

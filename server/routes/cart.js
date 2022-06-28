@@ -85,36 +85,65 @@ module.exports=(app)=>{
     });
 
     
-    router.post('/mine/checkout',async (req,res,next)=>{
+    // router.post('/mine/checkout',async (req,res,next)=>{
      
-        try{
-            if(req.session.passport?.user){
-                const cartExists=await cartHelperInstance.findCartById(req.session.passport.user);
-                if(!cartExists){
-                    res.status(500).send("Cart does not exist");
-                }else{
-                    const totalPrice=await cartHelperInstance.getTotalCartPrice(req.session.passport.user);
-                    if(totalPrice==0){
-                        res.status(500).send("Cart is empty");
-                    }else{
+    //     try{
+    //         if(req.session.passport?.user){
+    //             const cartExists=await cartHelperInstance.findCartById(req.session.passport.user);
+    //             if(!cartExists){
+    //                 res.status(500).send("Cart does not exist");
+    //             }else{
+    //                 const totalPrice=await cartHelperInstance.getTotalCartPrice(req.session.passport.user);
+    //                 if(totalPrice==0){
+    //                     res.status(500).send("Cart is empty");
+    //                 }else{
+    //                     const checkoutWithStripe= await cartHelperInstance.processPayment(req.body);
                         
-                        const newOrder=await orderHelperInstance.createOrder(totalPrice, req.session.passport.user);
-                    
-                        //delete cart and items
-                        if(newOrder){
-                            await orderHelperInstance.deleteCartAndCartItems(req.session.passport.user);
-                        }
-                        res.status(200).send("Successful checkout");
-                    }
-                }
+    //                     res.status(200).send(checkoutWithStripe);
+    //                 }
+    //             }
+    //         }else{
+    //             res.status(500).send('You must be logged in to add items to checkout')
+    //         }
+    //     }catch(err){
+    //         res.status(500).send(err)
+    //     }
+    // });
+    router.post('/mine/checkout', async (req, res, next) => {
+        try {
+            if(req.session.passport?.user){
+          const { cartId, paymentInfo } = req.body; 
+               
+          const response = await cartHelperInstance.checkout(cartId, req.session.passport.user, paymentInfo);
+          console.log(response);
+          res.status(200).send(response);
             }else{
-                res.status(500).send('You must be logged in to add items to checkout')
+                
+                res.status(500).send('You must be logged in to complete the checkout')
             }
-        }catch(err){
-            res.status(500).send(err)
+        } catch(err) {
+          res.status(500).send(err);
         }
-    });
-
+      });
+    // router.post('/mine/checkout-success',async (req,res,next)=>{
+    //     try{
+    //         if(req.session.passport?.user){
+    //         const totalPrice=await cartHelperInstance.getTotalCartPrice(req.session.passport.user);
+                    
+    //         const newOrder=await orderHelperInstance.createOrder(totalPrice, req.session.passport.user);
+            
+    //         //delete cart and items
+    //         if(newOrder){
+    //             await orderHelperInstance.deleteCartAndCartItems(req.session.passport.user);
+    //         }
+    //         res.status(200).send("Successful checkout");
+    //     }else{
+    //         res.status(500).send('You must be logged in to complete the checkout')
+    //     }
+    //     }catch(err){
+    //         res.status(500).send(err);
+    //     }
+    // })
     router.delete('/mine/:productId',async (req,res,next)=>{
         try{
             if(req.session.passport?.user){

@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createCart, findUserCart, findUserCartItems } from "./cartActions";
+import { createCart, findUserCart, findUserCartItems, retrieveStripeSessionId } from "./cartActions";
 
 
 const initialState={
     cart:{},
     isAuthenticated:false,
-    cartItems:[]
+    cartItems:[],
+    stripeSessionId:''
 }
 
 const cartSlice=createSlice({
@@ -23,6 +24,10 @@ const cartSlice=createSlice({
             state.cart=cart;
             state.isAuthenticated=isAuthenticated;
             state.cartItems=cartItems;
+        },
+        [retrieveStripeSessionId.fulfilled]:(state,action)=>{
+            const {stripeSessionId}=action.payload;
+            state.stripeSessionId=stripeSessionId;
         }
     }
 });
