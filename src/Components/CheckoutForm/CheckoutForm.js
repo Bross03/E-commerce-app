@@ -30,7 +30,7 @@ function CheckoutForm(){
     const dispatch=useDispatch();
     const stripe=useStripe();
     const elements=useElements()
-    const cart=useSelector(state=>state.cart)
+    const {cart,cartItems}=useSelector(state=>state.cart)
     const navigate=useNavigate();
 
     async function processPayment(e) {
@@ -53,10 +53,43 @@ function CheckoutForm(){
           throw err;
         }
       }
-
+      const calculateTotal=()=>{
+        let price=0;
+        if(cartItems.length){
+            cartItems.forEach(item => {
+                price=price+(item.price*item.qty);
+            });
+            return price;
+        }
+        return;
+      }
    
     return(
         <div className="checkoutFormPage">
+          <div className="cartItems">
+            {
+              !cartItems ? null
+              : 
+
+              cartItems.map((cartItem)=>{
+                return(
+                  <div>
+                    <div className="cartItemCheckout">
+                      <h4 className="itemCheckout">{cartItem.name}</h4>
+                      <p className="itemCheckoutQty">x{cartItem.qty}</p>
+                      <div className="pricesItemCheckout">
+                        <p className="totalPriceItemCheckout">total price: <span>${cartItem.price * cartItem.qty}</span></p>
+                        <p className="individualPriceCheckout">unit price: <span>${cartItem.price}</span></p>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })
+            }
+            <div className="cartItemCheckout">
+            <h2 className="totalPrice">Total: ${calculateTotal()}</h2>
+            </div>
+          </div>
           <div className="checkoutFormWrapper">
         <form onSubmit={processPayment} className="checkoutForm">
             <fieldset className="FormGroup">

@@ -5,11 +5,11 @@
     height:100vh;
     background-color: aqua;
     display:flex;
+	flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 .checkoutFormWrapper{
-    
     width:50%;
     height:1em;
 }
@@ -63,4 +63,29 @@
 	background-color: #d782d9;
 	box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 #e298d8;
 	transform: scale(0.99);
+}
+.cartItemCheckout{
+	background-color: white;
+	margin:1em;
+	box-shadow:0px 25px 40px black;
+	display:flex;
+	align-items: center;
+	justify-content: space-around;
+	padding:0.5em 0;
+}
+.cartItems{
+	width:50%;
+}
+.totalPriceItemCheckout{
+	font-size: 0.7em;
+}
+.individualPriceCheckout{
+	font-size:0.5em;
+}
+.pricesItemCheckout span{
+	font-size: 1.1em;
+	font-weight: 500;
+}
+.pricesItemCheckout{
+	text-align: right;
 }

@@ -17,7 +17,23 @@ module.exports=(app)=>{
             res.status(500).send(err);
         }
     });
-
+    
+    router.get('/mine', async (req,res,next)=>{
+        if(req.session.passport?.user){
+            const orders=await orderHelperInstance.getOrderByUserId(req.session.passport.user);
+            console.log(orders);
+            if(orders){
+                res.send(orders);
+            }else{
+                console.log('orders dont exist');
+                res.status(404).send('Orders not fond');
+            }
+        }else{
+            console.log('not logged in?');
+            res.status(500).send("You must be logged in to access this path");
+        }
+    })
+    
     //get a specific order
     router.get('/:id',async (req,res,next)=>{
         const order=await orderHelperInstance.getOrderById(req.params.id);

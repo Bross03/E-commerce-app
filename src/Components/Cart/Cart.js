@@ -21,25 +21,7 @@ function Cart(){
         }
     },[cartItems]);
 
-    const handleCheckout=async (e)=>{
-        e.preventDefault();
-        try{
-            const data=[];
-            cartItems.forEach(item=>{
-                data.push({productId:item.id,
-                    qty:item.qty})
-            });
-            
-            const session= await checkout(data);
-            console.log('continuing here')
-            console.log(session);
-            await dispatch(retrieveStripeSessionId(session.id));
-            //window.location=session.url;
-        }catch(err){
-            console.log('error thrown')
-            console.log(err);
-        }
-    }
+    
     return (
         
         <div className="cartPage">

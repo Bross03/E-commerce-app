@@ -109,7 +109,9 @@ module.exports=class orderHelper{
     };
 
     async getOrderByUserId(user_id){
-        const order= await dbQuery("SELECT * FROM orders WHERE user_id=$1", [user_id]);
+        const order= await dbQuery(`SELECT orders.id, orders.total, orders.status,
+         orders.created, orders.modified, users.email FROM orders
+        JOIN users ON orders.user_id=$1 AND users.id=orders.user_id;`, [user_id]);
         if(order.rows?.length){
             return order.rows;
         }

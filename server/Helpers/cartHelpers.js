@@ -168,7 +168,7 @@ module.exports=class cartHelper{
         
         const newOrder=await orderHelperInstance.createOrder(totalPrice,userId);
         await stripe.charges.create({
-            amount: totalPrice,
+            amount: totalPrice*100,
             currency: 'usd',
             source: paymentInfo.id,
             description: 'Nile.com charge'

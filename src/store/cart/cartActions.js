@@ -38,6 +38,8 @@ import { checkout, findCartById, getItemsOfUsersCart, loadCart } from '../../Api
       async ({ cartId, paymentInfo }, thunkAPI) => {
         try {
           const response = await checkout(cartId, paymentInfo);
+          console.log(response);
+          console.log('heyhey')
           return {
             order: response
           }
