@@ -75,18 +75,17 @@ function CheckoutForm(){
                 return(
                   <div>
                     <div className="cartItemCheckout">
-                      <h4 className="itemCheckout">{cartItem.name}</h4>
-                      <p className="itemCheckoutQty">x{cartItem.qty}</p>
-                      <div className="pricesItemCheckout">
-                        <p className="totalPriceItemCheckout">total price: <span>${cartItem.price * cartItem.qty}</span></p>
-                        <p className="individualPriceCheckout">unit price: <span>${cartItem.price}</span></p>
+                      <div className="productInfoCheckout">
+                        <p className="itemCheckoutQty">{cartItem.qty}x</p>
+                        <h4 className="itemCheckout">{cartItem.name}</h4>
                       </div>
+                        <p className="totalPriceItemCheckout">${cartItem.price * cartItem.qty}</p>
                     </div>
                   </div>
                 )
               })
             }
-            <div className="cartItemCheckout">
+            <div className="cartItemCheckoutTotal">
             <h2 className="totalPrice">Total: ${calculateTotal()}</h2>
             </div>
           </div>

@@ -1,5 +1,4 @@
 .image{
-    
     width:20em;
     height:25em;
     background-color: grey;
@@ -18,5 +17,22 @@
 }
 .product{
     background-color: rgb(235, 235, 235);
-    margin: 1em;
+    margin:1em;
+    display:flex;
+    flex-direction: column;
+}
+.seeMore{
+    margin:0.5em;
+    padding:1em;
+    background-color: aqua;
+    border-radius: 25px;
+    text-align: center;
+    color:black;
+    text-decoration: none;
+    font-size: 1em;
+    transition: 200ms;
+}
+.seeMore:hover{
+    background-color: rgb(3, 167, 167);
+    color:white;
 }

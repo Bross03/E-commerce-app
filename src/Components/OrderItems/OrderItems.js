@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import './OrderItems.js';
 
 function OrderItems(props){
@@ -11,12 +12,13 @@ function OrderItems(props){
     return(
         <tr onClick={dateManagment}>
             <td>{order.id}</td>
-            <td>{order.user_id}</td>
+            <td>{order.email}</td>
             <td>{
                 dateManagment()
             }</td>
             <td>{order.status}</td> 
-            <td>${order.total}</td>              
+            <td>${order.total}</td> 
+            <td><Link to={`/orders/${order.id}`}>See order</Link></td>             
         </tr>
     )
 }

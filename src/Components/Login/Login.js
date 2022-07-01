@@ -50,11 +50,10 @@ function Login(){
         await dispatch(createCart());
         await dispatch(findUserCart());
         
+        message.classList.remove('active');
         navigate('/');
             
         }catch(err){
-            console.log('heyyyyyy')
-            console.log(err.message);
             message.classList.add('active');
             message.innerHTML='Email or password are incorrect';
         }
@@ -78,7 +77,7 @@ function Login(){
                     <button type="submit" className="submitButtonLogin">Log In</button>
                 </form>
             </div>
-            <p className="signup">Don't have an account?<Link to="/signup" className="signupLink">Sign up here.</Link></p>
+            <p className="signup">Don't have an account?<Link to="/signup" className="signUpLink">Sign up here.</Link></p>
         </div>
     )
 }

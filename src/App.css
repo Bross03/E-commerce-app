@@ -20,7 +20,7 @@ nav{
   top:0;
   z-index:1;
 }
-.logo{
+.logo, .logoLink{
   color:white;
   font-size: 1.35em;
   text-decoration: none;
@@ -42,4 +42,18 @@ nav{
   background: none;
   color:white;
   border:none;
+}
+.signinLink, .signupLink{
+  color:white;
+  text-decoration: none;
+  font-size: 1.25em;
+  transition: 300ms;
+}
+.signinLink:hover, .signupLink:hover{
+  color:rgb(202, 226, 43);
+
+}
+.logoLink:hover{
+  color:fuchsia;
+
 }

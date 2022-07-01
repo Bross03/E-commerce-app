@@ -52,7 +52,7 @@ function ProductInfo(){
                     <div className="descrpition">
                         <h2 className="productTitle">{productSelected.name}</h2>
                         <h4 className="priceInfo">${productSelected.price}</h4>
-                        <div className="ratings">reviews but we can figure that out later</div>
+                        {/* <div className="ratings">reviews but we can figure that out later</div> */}
                         <div className="productDetails">
                             <h2>About this item:</h2>
                             <p className="descriptionProduct">{productSelected.description} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>

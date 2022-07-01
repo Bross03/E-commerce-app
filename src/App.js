@@ -61,7 +61,7 @@ function App() {
                     <h2 className="navbar logo">Nile.com</h2>
                 </div>
                 :
-                <Link to="/" className="navbar logo">Nile.com</Link>
+                <Link to="/" className="navbar logoLink">Nile.com</Link>
                 }
                 {
                     isAuthenticated ? 

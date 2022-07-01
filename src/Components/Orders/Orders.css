@@ -4,15 +4,77 @@
     top:2.6em;
     width:100%;
     background-color: aqua;
-    height:100vh;
+    min-height:100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .ordersContainer{
     width:70%;
-   
+    margin:3em;
     background-color: white;
     border-radius:1.5em;
     box-shadow:0px 25px 40px black;
 }
+.ordersTableTitle{
+    margin:1em;
+}
+table {
+    width: 95%;
+    border-collapse: collapse;
+    margin: 1em auto;
+}
+    td,
+    th {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      text-align: center;
+      font-size: 16px;
+    }
+  
+    th {
+      background-color: darkblue;
+      color: #ffffff;
+    }
+  
+    tbody tr:nth-child(even) {
+        background-color: #f5f5f5;
+      }
+    
+
+  
+  /*responsive*/
+  
+  @media (max-width: 800px) {
+    table thead {
+      display: none;
+    }
+  
+    table,
+    table tbody,
+    table tr,
+    table td {
+      display: block;
+      width: 100%;
+    }
+    table tr {
+      margin-bottom: 2em;
+    }
+    table td {
+      text-align: right;
+      
+      text-align: right;
+      position: relative;
+    }
+    table td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      width: 50%;
+      padding-left: 1em;
+      font-size: 1em;
+      font-weight: bold;
+      text-align: left;
+    }
+  }
+  

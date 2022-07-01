@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { checkoutCart } from "../cart/cartActions";
-import { fetchOrders } from "./orderActions";
+import { fetchOrders, getuserOrderItems } from "./orderActions";
 
 const initialState={
     order:{},
-    orders:[]
+    orders:[],
+    orderItems:[]
 }
 
 const orderSlice=createSlice({
@@ -20,6 +21,10 @@ const orderSlice=createSlice({
         [fetchOrders.fulfilled]:(state,action)=>{
             const {orders}=action.payload;
             state.orders=orders;
+        },
+        [getuserOrderItems.fulfilled]:(state,action)=>{
+            const {orderItems}=action.payload;
+            state.orderItems=orderItems;
         }
     }
 });

@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { checkout } from "../../Api/cart";
-import { checkoutCart, retrieveStripeSessionId } from "../../store/cart/cartActions";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+
 import CartItem from "../CartItem/CartItem";
 import './Cart.css';
 
 function Cart(){
     const {cartItems, isAuthenticated}=useSelector(state=>state.cart);
     const [totalPrice,setTotalPrice]=useState(0);
-    const dispatch=useDispatch();
+    const navigate=useNavigate();
 
     useEffect(()=>{
         let price=0;
@@ -20,11 +19,34 @@ function Cart(){
             setTotalPrice(price);
         }
     },[cartItems]);
-
+    const handleCheckoutButton=(e)=>{
+        e.preventDefault();
+        const message=document.querySelector('.messageCart');
+        try{
+            let allItemsAvailable=true;
+            cartItems.forEach(item=>{
+                if((item.in_stock-item.qty)<0){
+                    allItemsAvailable=false;
+                }
+                console.log(allItemsAvailable);
+                return;
+            })
+            if(allItemsAvailable){
+                message.classList.remove('active');
+                navigate('/checkout');
+            }else{
+                message.classList.add('active');
+                message.innerHTML='One or more items seem to be out of stock'
+            }
+        }catch(err){
+            console.log(err)
+        }
+    }
     
     return (
         
         <div className="cartPage">
+            <span className="messageCart"></span>
             {
                 isAuthenticated ?
             <div className="cartContainer">
@@ -52,7 +74,7 @@ function Cart(){
                         <h4 className="subtotal">Subtotal</h4>
                         <div className="totalAmount">${totalPrice}</div>
                     </div>
-                    <Link className="checkoutBtn" to="/checkout" >Checkout</Link>
+                    <button className="checkoutBtn" onClick={handleCheckoutButton} >Checkout</button>
                 </div>
             </div>
             :
@@ -64,6 +86,7 @@ function Cart(){
                 </div>   
             </div>
             }
+            
         </div>
        
         

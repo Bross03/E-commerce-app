@@ -63,10 +63,13 @@ function CartItem(props){
             console.log(err);
         }
     }
+    const redirectToProduct=()=>{
+        navigate(`/products/${product.id}`);
+    }
     return(
         <div className="cartItem">
-            <img src={require(`./../../Images/p${product.id}.jpg`)} alt="product image" className="imageCartItem"></img>
-            <div className="aboutCartItem">
+            <img src={require(`./../../Images/p${product.id}.jpg`)} alt="product image" className="imageCartItem" onClick={redirectToProduct}></img>
+            <div className="aboutCartItem" >
                 <h2 className="titleCartItem">{product.name}:</h2>
                 <p className="subtitleCartItem">In stock: 
                 {

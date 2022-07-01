@@ -19,23 +19,28 @@ function Orders(){
     return(
         <div className="ordersPage">
             <div className="ordersContainer">
-                <h1>Your orders</h1>
+                <h1 className="ordersTableTitle">Your orders</h1>
                 {
                     !orders.length ? null
                     :
                 <table>
+                    <thead>
                     <tr>
                         <th>Order ID</th>
                         <th>Name</th>
                         <th>Date</th>
                         <th>Status</th>
                         <th>Price</th>
+                        <th>Full Order</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     {
                     orders.map(order=>{
                         return <OrderItems order={order}/>
                     })
                     }
+                    </tbody>
                     {/* <tr>
                         <td>Alfreds Futterkiste</td>
                         <td>Maria Anders</td>

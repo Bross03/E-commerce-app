@@ -32,6 +32,22 @@ module.exports=(app)=>{
             console.log('not logged in?');
             res.status(500).send("You must be logged in to access this path");
         }
+    });
+
+    //get items of a specific user order
+    router.get('/mine/:id', async (req,res,next)=>{
+        if(req.session.passport?.user){
+            const items=await orderHelperInstance.getItemsFromUserOrder(req.params.id,req.session.passport.user);
+            console.log(items);
+            if(items){
+                res.send(items);
+            }else{
+                res.status(404).send('Order was empty');
+            }
+        }else{
+            
+            res.status(500).send("You must be logged in to access this path");
+        }
     })
     
     //get a specific order

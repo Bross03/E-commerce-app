@@ -142,5 +142,15 @@ module.exports=class orderHelper{
                 return err;
             }
     }
+    async doesUserHaveThisOrder(order_id,user_id){
+        const exists=await dbQuery('SELECT status FROM orders WHERE orders.id=$1 AND orders.user_id=$2;',[order_id,user_id]);
+        console.log(exists);
+    }
+    async getItemsFromUserOrder(order_id,user_id){
+        this.doesUserHaveThisOrder(order_id, user_id);
+        const statement=`SELECT products.name,
+         order_items.qty,products.price FROM order_items, products WHERE
+        order_items.product_id=products.id AND order_items.order_id=28;`
+    }
 
 }
