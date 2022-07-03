@@ -10,18 +10,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { checkLoginStatus, logoutUser } from './store/auth/authActions';
 import Cart from './Components/Cart/Cart';
 import PaymentSuccess from './Components/PaymentSuccess/PaymentSuccess';
-import { createCart } from './store/cart/cartActions';
+import { createCart, findUserCart } from './store/cart/cartActions';
 import { findCartById } from './Api/cart';
 import Checkout from './Components/Checkout/Checkout';
 import Orders from './Components/Orders/Orders';
+import OrderItems from './Components/OrderItems/OrderItems';
 
 function App() {
+
     const location=useLocation();
    
     const isLocationHome=location.pathname=='/';
 
     const dispatch=useDispatch();
-    const {isAuthenticated, user}= useSelector(state=>state.auth)
+    const {isAuthenticated, user}= useSelector(state=>state.auth);
+    const {isCartAuthenticated}=useSelector(state=>state.cart)
     const handleLogout=async ()=>{
       try{
       await dispatch(logoutUser());
@@ -32,9 +35,16 @@ function App() {
   }
   useEffect(() => {
     async function isLoggedIn() {
-      await dispatch(checkLoginStatus());
-      await dispatch(createCart());
-      await dispatch(findCartById());
+      try{
+        console.log('this one runs')
+        await dispatch(checkLoginStatus());
+      if(!isCartAuthenticated){
+        await dispatch(findUserCart());
+        await dispatch(createCart());
+      }
+      }catch(err){
+        console.log(err);
+      }
     }
 
      isLoggedIn();
@@ -88,11 +98,12 @@ function App() {
             <Route exact path="/signup" element={<Signup/>}/>
             <Route exact path="/login" element={<Login/>}/>
             <Route exact path='/' element={<Home/>}/>
-            <Route exact path='products/:productId' element={<ProductInfo/>}/>
+            <Route exact path='/products/:productId' element={<ProductInfo/>}/>
             <Route exact path='/cart' element={<Cart/>}/>
             <Route exact path='/checkout' element={<Checkout/>}/>
             <Route exact path='/orders' element={<Orders/>}/>
             <Route exact path='/paymentSuccess' element={<PaymentSuccess/>}/>
+            <Route exact path='/orders/:orderId' element={<OrderItems />}/>
           </Routes>
         </body>
       </div>

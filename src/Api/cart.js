@@ -17,13 +17,14 @@ export const loadCart=async ()=>{
         return response.data;
         
     }catch(err){
+        console.log('error on the api thing');
+        console.log(err)
         throw err.response.data;
     }
 }
 export const findCartById=async()=>{
     try{
         const response=await API.get('cart/mine');
-        console.log(response);
         return response.data[0];
     }catch(err){
         console.log(err);

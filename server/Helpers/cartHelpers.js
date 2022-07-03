@@ -123,44 +123,7 @@ module.exports=class cartHelper{
         const result= await dbQuery(statement, [productId,userId]);
         return result;
     };
-    //  async formatItemsForStripe(products){
-    //     //array in the format [{productId:2,qty:3},{productId:3, qty:2}]
-    //     const productsFormatted=[]
-    //     for(let i=0;i<products.length;i++){
-    //         const productObject=await productHelperInstance.findProductById(products[i].productId);
-    //         console.log(productObject);
-    //         productsFormatted.push({
-    //             price_data: {
-    //                 currency: 'usd',
-    //                 product_data: {
-    //                     name: productObject.name
-    //                 },
-    //                 unit_amount: (parseInt(productObject.price) * 100)
-    //             },
-    //             quantity: products[i].qty
-    //         });
-    //     }
-    //    console.log(productsFormatted);
-    //    console.log(productsFormatted[0].price_data.product_data);
-    //     return productsFormatted;
-    // }
-    // async processPayment(products){
-    //     try{
-    //     const stripe = require("stripe")(STRIPE_SECRET_KEY);
-    //     const items=await this.formatItemsForStripe(products);
-    //     const session = await stripe.checkout.sessions.create({
-    //         payment_method_types: ['card'],
-    //         mode: 'payment',
-    //         line_items: items,
-    //         success_url: `${CLIENT_URL}/payment-success`,
-    //         cancel_url: `${CLIENT_URL}/payment-cancel`
-    //     });
-    //     console.log(session);
-    //     return session;
-    //     }catch(error){
-    //         console.log(error);
-    //     }
-    // }
+
     async checkout(cartId, userId, paymentInfo){
         try{
         const stripe = require("stripe")(STRIPE_SECRET_KEY);

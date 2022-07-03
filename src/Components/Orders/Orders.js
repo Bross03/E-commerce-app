@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import './Orders.css';
 import { useDispatch, useSelector } from "react-redux";
-import OrderItems from "../OrderItems/OrderItems";
 import { fetchOrders } from "../../store/orders/orderActions";
+import Order from "../Order/Order";
 
 function Orders(){
 
@@ -37,7 +37,7 @@ function Orders(){
                     <tbody>
                     {
                     orders.map(order=>{
-                        return <OrderItems order={order}/>
+                        return <Order order={order} key={order.id}/>
                     })
                     }
                     </tbody>

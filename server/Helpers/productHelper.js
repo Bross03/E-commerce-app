@@ -56,7 +56,6 @@ module.exports=class productHelper{
         return null;
 
         }catch(err){
-            console.log('err being thrown');
             return err;
         }
     };

@@ -1,0 +1,57 @@
+.orderItemsPage{
+    position:absolute;
+    top:2.6em;
+    width:100%;
+    background-color: aqua;
+    min-height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.orderItemsContainer{
+    background-color: white;
+    width:70%;
+    border-radius:1em;
+    padding-bottom: 1em;
+    
+}
+.orderHeader{
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin:0.5em 1em;
+}
+.orderHeader p{
+    font-weight:700;
+    font-size: 0.75em;
+    margin:1em 1em;
+}
+.listOfOrderItems{
+    border-top:1px solid black;
+}
+.returnOrders {
+    text-decoration: none;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	font-size: 16px;
+	width: 70%;
+	height: 40px;
+	margin: 40px 15px 0;
+	background-color: #f6a4eb;
+	box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 #ffb9f6;
+	border-radius: 4px;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 100ms ease-in-out;
+	will-change: transform, background-color, box-shadow;
+	border: none;
+}
+
+.returnOrders:active {
+	background-color: #d782d9;
+	box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 #e298d8;
+	transform: scale(0.99);
+}

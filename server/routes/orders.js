@@ -21,7 +21,6 @@ module.exports=(app)=>{
     router.get('/mine', async (req,res,next)=>{
         if(req.session.passport?.user){
             const orders=await orderHelperInstance.getOrderByUserId(req.session.passport.user);
-            console.log(orders);
             if(orders){
                 res.send(orders);
             }else{
@@ -37,7 +36,8 @@ module.exports=(app)=>{
     //get items of a specific user order
     router.get('/mine/:id', async (req,res,next)=>{
         if(req.session.passport?.user){
-            const items=await orderHelperInstance.getItemsFromUserOrder(req.params.id,req.session.passport.user);
+            const items=await orderHelperInstance.getItemsFromUserOrder(req.params.id, req.session.passport.user);
+            console.log('yoyoyoyoyooyoy')
             console.log(items);
             if(items){
                 res.send(items);

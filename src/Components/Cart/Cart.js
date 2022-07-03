@@ -6,7 +6,7 @@ import CartItem from "../CartItem/CartItem";
 import './Cart.css';
 
 function Cart(){
-    const {cartItems, isAuthenticated}=useSelector(state=>state.cart);
+    const {cartItems, isCartAuthenticated}=useSelector(state=>state.cart);
     const [totalPrice,setTotalPrice]=useState(0);
     const navigate=useNavigate();
 
@@ -48,7 +48,7 @@ function Cart(){
         <div className="cartPage">
             <span className="messageCart"></span>
             {
-                isAuthenticated ?
+                isCartAuthenticated ?
             <div className="cartContainer">
                 
                 <h3 className="cartHeading">Your cart</h3>

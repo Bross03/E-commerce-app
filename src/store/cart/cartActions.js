@@ -21,14 +21,18 @@ import { checkout, findCartById, getItemsOfUsersCart, loadCart } from '../../Api
     'cart/findCart',
     async (params, thunkAPI) => {
       try {
+        console.log('hey');
         const cart = await findCartById();
         const cartItems = await getItemsOfUsersCart();
+        console.log('?')
         return {
           cart:cart,
           isAuthenticated: true,
           cartItems:cartItems
         }
       } catch(err) {
+        console.log('aaaaa');
+        console.log(err);
         throw err;
       }
     }

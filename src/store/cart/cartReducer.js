@@ -4,7 +4,7 @@ import { createCart, findUserCart, findUserCartItems, retrieveStripeSessionId } 
 
 const initialState={
     cart:{},
-    isAuthenticated:false,
+    isCartAuthenticated:false,
     cartItems:[],
     stripeSessionId:''
 }
@@ -17,12 +17,12 @@ const cartSlice=createSlice({
         [createCart.fulfilled]:(state,action)=>{
             const {cart,isAuthenticated}=action.payload;
             state.cart=cart;
-            state.isAuthenticated=isAuthenticated;
+            state.isCartAuthenticated=isAuthenticated;
         },
         [findUserCart.fulfilled]:(state,action)=>{
             const {cart,isAuthenticated,cartItems}=action.payload;
             state.cart=cart;
-            state.isAuthenticated=isAuthenticated;
+            state.isCartAuthenticated=isAuthenticated;
             state.cartItems=cartItems;
         },
         [retrieveStripeSessionId.fulfilled]:(state,action)=>{

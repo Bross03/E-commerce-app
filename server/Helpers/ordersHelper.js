@@ -144,13 +144,26 @@ module.exports=class orderHelper{
     }
     async doesUserHaveThisOrder(order_id,user_id){
         const exists=await dbQuery('SELECT status FROM orders WHERE orders.id=$1 AND orders.user_id=$2;',[order_id,user_id]);
-        console.log(exists);
+        if(exists.rows.length){
+            return true;
+        }else{
+            return false;
+        }
     }
     async getItemsFromUserOrder(order_id,user_id){
-        this.doesUserHaveThisOrder(order_id, user_id);
+        const exists= this.doesUserHaveThisOrder(order_id, user_id);
+        if(!exists){
+            console.log('not authorized');
+            return null;
+        }
         const statement=`SELECT products.name,
          order_items.qty,products.price FROM order_items, products WHERE
-        order_items.product_id=products.id AND order_items.order_id=28;`
+        order_items.product_id=products.id AND order_items.order_id=$1;`
+        const orderItems=await dbQuery(statement,[order_id]);
+        if(orderItems.rows?.length){
+            return orderItems.rows;
+        }
+        return null;
     }
 
 }
