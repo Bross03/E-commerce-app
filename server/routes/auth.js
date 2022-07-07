@@ -62,6 +62,15 @@ module.exports=(app, passport)=>{
         }
     );
     
+    router.get('/google', passport.authenticate('google', {scope: [ 'profile', 'email' ]}));
+
+    router.get('/google/callback',
+        passport.authenticate('google', { failureRedirect: '/login' }),
+        async (req, res) => {
+            
+        res.redirect(CLIENT_URL);
+        }
+    );
     //loging out users
     router.get("/logout", (req, res) => {
         req.logout();

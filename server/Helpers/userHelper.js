@@ -79,5 +79,22 @@ module.exports=class userHelper{
         }catch(err){
             return err;
         }
+    };
+    async findUserByGoogleId(id){
+        try{
+            console.log('see if i can find user')
+            console.log(id);
+            const statement=`SELECT * FROM users WHERE google->> 'id'=$1`;
+            const values=[id];
+            const user=await dbQuery(statement, values);
+            console.log(user.rows?.length);
+            if(user.rows?.length){
+                return user.rows[0]
+            }
+            return null;
+            
+        }catch(err){
+            return err;
+        }
     }
 }

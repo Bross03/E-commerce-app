@@ -1,9 +1,10 @@
 const passport=require('passport');
 const LocalStrategy=require('passport-local');
 const AuthHelper=require('../Helpers/authHelper.js');
-const { FACEBOOK } = require('../config.js');
+const { FACEBOOK, GOOGLE } = require('../config.js');
 const AuthHelperInstance= new AuthHelper();
 const FacebookStrategy = require('passport-facebook').Strategy;
+const GoogleStrategy=require('passport-google-oauth20').Strategy;
 
 module.exports=async (app)=>{
 
@@ -50,6 +51,33 @@ module.exports=async (app)=>{
             };
             console.log(userData);
             const user=await AuthHelperInstance.loginWithFacebook(userData);
+            return done(null, user);
+        }catch(err){
+            return done(err);
+        }
+    }));
+
+    passport.use(new GoogleStrategy({
+        clientID: GOOGLE.CONSUMER_KEY,
+        clientSecret: GOOGLE.CONSUMER_SECRET,
+        callbackURL:GOOGLE.CALLBACK_URL,
+        profileFields: ["email", "name"]
+    },
+    async(accessToken, refreshToken, profile, done)=>{
+        try{
+            console.log('is this thing even running?');
+            console.log('profile below')
+            console.log(profile);
+            const { email, given_name, family_name } = profile._json;
+            const {id}=profile;
+            const userData = {
+                email,
+                firstName: given_name,
+                lastName: family_name,
+                googleID: id
+            };
+            console.log(userData);
+            const user=await AuthHelperInstance.loginWithGoogle(userData);
             return done(null, user);
         }catch(err){
             return done(err);

@@ -43,8 +43,6 @@ module.exports= class AuthHelpers{
         }
     };
     async loginWithFacebook(data){
-        
-
         try{
             const user=await userHelperInstance.findUserByFacebookId(data.facebookID);
             if(!user){
@@ -54,6 +52,29 @@ module.exports= class AuthHelpers{
                     email:data.email,
                     facebook:{
                         id:data.facebookID
+                    }
+                }
+                const newUser=await userHelperInstance.createUser(userDataFormatted);
+                return newUser;
+            }
+
+            return user;
+        }catch(err){
+            return err;
+        }
+    };
+    async loginWithGoogle(data){
+        try{
+            console.log('yo this is data');
+            console.log(data)
+            const user=await userHelperInstance.findUserByGoogleId(data.googleID);
+            if(!user){
+                const userDataFormatted={
+                    first_name: data.firstName,
+                    last_name: data.lastName,
+                    email:data.email,
+                    google:{
+                        id:data.googleID
                     }
                 }
                 const newUser=await userHelperInstance.createUser(userDataFormatted);

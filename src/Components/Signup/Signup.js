@@ -105,6 +105,13 @@ function Signup(){
             console.log(err);
         }
     }
+    const googleLogin=()=>{
+        try{
+        window.open('http://localhost:4000/api/auth/google','_self')
+        }catch(err){
+            console.log(err);
+        }
+    }
     
     return(
         <div className="signUpPage">
@@ -132,7 +139,7 @@ function Signup(){
                 <h4>Or Sign Up with</h4>
                 <div className="socialLogins">
                   <div className="facebookButton" onClick={facebookLogin}>Facebook</div>
-                  <div className="googleButton" onClick={facebookLogin}>Google</div>
+                  <div className="googleButton" onClick={googleLogin}>Google</div>
                   <div className="githubButton" onClick={facebookLogin}>Github</div>
                 </div>
             </div>
