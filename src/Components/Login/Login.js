@@ -58,24 +58,37 @@ function Login(){
             message.innerHTML='Email or password are incorrect';
         }
     }
+    const facebookLogin=()=>{
+        try{
+        window.open('http://localhost:4000/api/auth/facebook','_self')
+        }catch(err){
+            console.log(err);
+        }
+    }
     return (
         <div className="loginPage">
             <span className="message"></span>
             <div className="loginCard">
-            <div className="title">
-            <h2>Log In</h2>
-            <p className="loginFormDescription">Fill in this form to log in</p>
-            </div>    
+                <div className="title">
+                    <h2>Log In</h2>
+                    <p className="loginFormDescription">Fill in this form to log in</p>
+                </div>    
                 <form className="loginForm" onSubmit={onSubmitLogin}>
                     
-                    <input className="emailLogin" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
-                    <input className="passwordLogin" 
+                    <input className="longinput emailLogin" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+                    <input className="longinput passwordLogin" 
                     type="password" placeholder="Password" 
                     value={password} onChange={(e) => setPassword(e.target.value)}></input>
                     
                     
                     <button type="submit" className="submitButtonLogin">Log In</button>
                 </form>
+                <h4>Or Log In with</h4>
+                <div className="socialLogins">
+                  <div className="facebookButton" onClick={facebookLogin}>Facebook</div>
+                  <div className="googleButton" onClick={facebookLogin}>Google</div>
+                  <div className="githubButton" onClick={facebookLogin}>Github</div>
+                </div>
             </div>
             <p className="signup">Don't have an account?<Link to="/signup" className="signUpLink">Sign up here.</Link></p>
         </div>

@@ -13,7 +13,9 @@
     width: 350px;
     background-color: white;
     min-height: 350px;
-    height:50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .signupForm{
     display: flex;
@@ -24,7 +26,7 @@
     height:70%;
 }
 .title{
-    padding: 1em;
+    width:100%;
 }
 h2{
     margin:0 0 0.3em 0;
@@ -45,6 +47,9 @@ input{
     width: 100%;
     height: 2.5em;
 }
+.longinput{
+    margin:0.5em 0;
+}
 .submitButton {
     border-color: aqua;
     background-image: -webkit-linear-gradient(45deg, aqua 50%, transparent 50%);
@@ -56,6 +61,7 @@ input{
     border-radius: 1em;
     padding:0.7em;
     width:10em;
+    cursor:pointer;
 }
 
 .submitButton:hover {
@@ -75,4 +81,43 @@ input{
     margin:1em;
     color:white;
     border-radius:1em;
+}
+.socialLogins{
+    width:100%;
+    display:flex;
+    justify-content: space-around;
+    margin:1em;
+}
+.facebookButton{
+    background-color: #4267B2;
+    color: white;
+    font-weight: 700;
+    padding:0.4em;
+    border-radius: 25px;
+    cursor:pointer;
+}
+.facebookButton:hover{
+    background-color: #22355b;
+}
+.googleButton{
+    background-color: #DB4437;
+    color: white;
+    font-weight: 700;
+    padding:0.4em;
+    border-radius: 25px;
+    cursor:pointer;
+}
+.googleButton:hover{
+    background-color: #902e26;
+}
+.githubButton{
+    background-color: #171515;
+    color: white;
+    font-weight: 700;
+    padding:0.4em;
+    border-radius: 25px;
+    cursor:pointer;
+}
+.githubButton:hover{
+    background-color: #5a5353;
 }

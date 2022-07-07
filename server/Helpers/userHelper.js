@@ -26,9 +26,14 @@ module.exports=class userHelper{
         const newUserId=await utilInstance.createNewId('users');
         const stringNewId=newUserId.toString();
         data={...data, 'id': stringNewId};
+        console.log(data);
+        console.log('last one was data');
         const query=pgp.helpers.insert(data, null, 'users');
-        const newUser= await dbQuery(query);
-        return newUser;
+        await dbQuery(query);
+        const newUser=await dbQuery("SELECT * FROM users WHERE id=$1",[stringNewId])
+        console.log('this is the new user');
+        console.log(newUser.rows[0]);
+        return newUser.rows[0];
 
         }catch(err){
             return err;
@@ -56,6 +61,21 @@ module.exports=class userHelper{
             }
             return null;
     
+        }catch(err){
+            return err;
+        }
+    };
+    async findUserByFacebookId(id){
+        try{
+            const statement=`SELECT * FROM users WHERE facebook->> 'id'=$1`;
+            const values=[id];
+            const user=await dbQuery(statement, values);
+            console.log(user.rows?.length);
+            if(user.rows?.length){
+                return user.rows[0]
+            }
+            return null;
+            
         }catch(err){
             return err;
         }

@@ -13,12 +13,9 @@ export const addItem=async (data)=>{
 export const loadCart=async ()=>{
     try{
         const response=await API.post('cart');
-        console.log(response);
         return response.data;
         
     }catch(err){
-        console.log('error on the api thing');
-        console.log(err)
         throw err.response.data;
     }
 }
@@ -59,7 +56,6 @@ export const deleteItemFromCart=async(data)=>{
 export const checkout = async (cartId, paymentInfo) => {
     try {
       const response = await API.post(`cart/mine/checkout`, { cartId, paymentInfo });
-  
       return response.data;
   
     } catch(err) {

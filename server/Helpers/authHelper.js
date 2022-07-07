@@ -42,6 +42,27 @@ module.exports= class AuthHelpers{
             return err;
         }
     };
+    async loginWithFacebook(data){
+        
 
- 
+        try{
+            const user=await userHelperInstance.findUserByFacebookId(data.facebookID);
+            if(!user){
+                const userDataFormatted={
+                    first_name: data.firstName,
+                    last_name: data.lastName,
+                    email:data.email,
+                    facebook:{
+                        id:data.facebookID
+                    }
+                }
+                const newUser=await userHelperInstance.createUser(userDataFormatted);
+                return newUser;
+            }
+
+            return user;
+        }catch(err){
+            return err;
+        }
+    }
 }

@@ -37,3 +37,11 @@ export const logout=async ()=>{
         throw err.response;
     }
 }
+export const loginFacebook=async (data)=>{
+    try{
+        const response=await API.get('auth/facebook');
+        return response;
+    }catch(err){
+        throw err.response.data
+    }
+}

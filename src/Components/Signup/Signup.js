@@ -97,30 +97,44 @@ function Signup(){
             message.classList.add('active');
             message.innerHTML=err;
         }
+    };
+    const facebookLogin=()=>{
+        try{
+        window.open('http://localhost:4000/api/auth/facebook','_self')
+        }catch(err){
+            console.log(err);
+        }
     }
+    
     return(
         <div className="signUpPage">
             <span className="message"></span>
             <div className="signUpCard">
-            <div className="title">
-            <h2>Sign Up</h2>
-            <p className="formDescription">Fill in this form to create an account</p>
-            </div>    
+                <div className="title">
+                    <h2>Sign Up</h2>
+                    <p className="formDescription">Fill in this form to create an account</p>
+                </div>    
                 <form className="signupForm" onSubmit={onSubmitSignup}>
                     <div className="name">
                         <input className="firstName" type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input>
                         <input className="lastName" type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)}></input>
                     </div>
-                    <input className="email" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
-                    <input className="password" 
+                    <input className="longinput email" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+                    <input className="longinput password" 
                     type="password" placeholder="Password" 
                     value={password} onChange={(e) => setPassword(e.target.value)}></input>
-                    <input className="passwordConfirm" 
+                    <input className="longinput passwordConfirm" 
                     type="password" placeholder="Confirm Password"
                     value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}></input>
                     
                     <button type="submit" className="submitButton">Register</button>
                 </form>
+                <h4>Or Sign Up with</h4>
+                <div className="socialLogins">
+                  <div className="facebookButton" onClick={facebookLogin}>Facebook</div>
+                  <div className="googleButton" onClick={facebookLogin}>Google</div>
+                  <div className="githubButton" onClick={facebookLogin}>Github</div>
+                </div>
             </div>
             <p className="login">Already have an account?<Link to="/login" className="loginLink">Login here.</Link></p>
         </div>

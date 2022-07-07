@@ -1,4 +1,5 @@
 const express = require('express');
+const { CLIENT_URL } = require('../config.js');
 const router=express.Router();
 
 const AuthHelper=require('../Helpers/authHelper.js')
@@ -51,6 +52,16 @@ module.exports=(app, passport)=>{
         }
     });
 
+    router.get('/facebook', passport.authenticate('facebook', {scope: [ 'email' ]}));
+
+    router.get('/facebook/callback',
+        passport.authenticate('facebook', { failureRedirect: '/login' }),
+        async (req, res) => {
+            
+        res.redirect(CLIENT_URL);
+        }
+    );
+    
     //loging out users
     router.get("/logout", (req, res) => {
         req.logout();
