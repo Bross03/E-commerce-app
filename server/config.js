@@ -18,6 +18,11 @@ module.exports = {
       CONSUMER_KEY: process.env.GOOGLE_CONSUMER_KEY,
       CONSUMER_SECRET: process.env.GOOGLE_CONSUMER_SECRET
     },
+    GITHUB: {
+      CALLBACK_URL: process.env.GITHUB_CALLBACK_URL,
+      CONSUMER_KEY: process.env.GITHUB_CONSUMER_KEY,
+      CONSUMER_SECRET: process.env.GITHUB_CONSUMER_SECRET
+    },
     PORT: process.env.SERVER_PORT,
     SESSION_SECRET: process.env.SESSION_SECRET,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,

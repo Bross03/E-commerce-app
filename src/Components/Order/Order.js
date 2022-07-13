@@ -10,7 +10,7 @@ function Order(props){
         return date.toLocaleDateString("en-US", options); // Saturday, September 17, 2016
         }
     return(
-        <tr onClick={dateManagment}>
+        <tr>
             <td>{order.id}</td>
             <td>{order.email}</td>
             <td>{

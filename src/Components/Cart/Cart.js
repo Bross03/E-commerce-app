@@ -28,7 +28,6 @@ function Cart(){
                 if((item.in_stock-item.qty)<0){
                     allItemsAvailable=false;
                 }
-                console.log(allItemsAvailable);
                 return;
             })
             if(allItemsAvailable){
@@ -39,7 +38,7 @@ function Cart(){
                 message.innerHTML='One or more items seem to be out of stock'
             }
         }catch(err){
-            console.log(err)
+            return err;
         }
     }
     

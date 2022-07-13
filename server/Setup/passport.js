@@ -1,7 +1,7 @@
 const passport=require('passport');
 const LocalStrategy=require('passport-local');
 const AuthHelper=require('../Helpers/authHelper.js');
-const { FACEBOOK, GOOGLE } = require('../config.js');
+const { FACEBOOK, GOOGLE, GITHUB } = require('../config.js');
 const AuthHelperInstance= new AuthHelper();
 const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy=require('passport-google-oauth20').Strategy;
@@ -82,6 +82,9 @@ module.exports=async (app)=>{
         }catch(err){
             return done(err);
         }
-    }))
+    }));
+
+
+
     return passport;
 }

@@ -85,5 +85,6 @@ module.exports= class AuthHelpers{
         }catch(err){
             return err;
         }
-    }
+    };
+    
 }

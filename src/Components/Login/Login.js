@@ -93,8 +93,7 @@ function Login(){
                 <h4>Or Log In with</h4>
                 <div className="socialLogins">
                   <div className="facebookButton" onClick={facebookLogin}>Facebook</div>
-                  <div className="googleButton" onClick={googleLogin}>Google</div>
-                  <div className="githubButton" onClick={facebookLogin}>Github</div>
+                  <div className="googleButton" onClick={googleLogin}>Google</div>    
                 </div>
             </div>
             <p className="signup">Don't have an account?<Link to="/signup" className="signUpLink">Sign up here.</Link></p>

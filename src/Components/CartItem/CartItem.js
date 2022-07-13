@@ -25,7 +25,7 @@ function CartItem(props){
             await addItemToCart(data);
             await dispatch(findUserCart());
         }catch(err){
-            console.log(err);
+            return err;
         }
     };
     const removeItem=async (e)=>{
@@ -36,7 +36,6 @@ function CartItem(props){
                 productId:product.id,
                 qty:-1
             }
-            console.log(data);
             await addItemToCart(data);
             }else{
                 const data={
@@ -47,7 +46,7 @@ function CartItem(props){
             await dispatch(findUserCart());
         
         }catch(err){
-            console.log(err);
+            return err;
         }
     }
     const deleteItem=async(e)=>{
@@ -56,11 +55,10 @@ function CartItem(props){
             const data={
                 productId:product.id
             }
-            console.log(data);
             await deleteItemFromCart(data);
             await dispatch(findUserCart());
         }catch(err){
-            console.log(err);
+            
         }
     }
     const redirectToProduct=()=>{

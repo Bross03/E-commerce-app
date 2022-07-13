@@ -15,6 +15,7 @@ import { findCartById } from './Api/cart';
 import Checkout from './Components/Checkout/Checkout';
 import Orders from './Components/Orders/Orders';
 import OrderItems from './Components/OrderItems/OrderItems';
+import Admin from './Components/Admin/Admin';
 
 function App() {
 
@@ -36,14 +37,13 @@ function App() {
   useEffect(() => {
     async function isLoggedIn() {
       try{
-        console.log('this one runs')
         await dispatch(checkLoginStatus());
       if(!isCartAuthenticated){
         await dispatch(findUserCart());
         await dispatch(createCart());
       }
       }catch(err){
-        console.log(err);
+        return err;
       }
     }
 
@@ -84,6 +84,13 @@ function App() {
                             <li onClick={toggleProfileMenu}><img src="" /><Link to='/cart' className="dropMenuLink">My cart</Link></li>
                             <li onClick={toggleProfileMenu}><img src="" /><Link to='/orders' className="dropMenuLink">My orders</Link></li>
                             <li onClick={toggleProfileMenu}><img src="" /><Link to='/' className="dropMenuLink" onClick={handleLogout}>Logout</Link></li>
+                            {
+                              user.id==1 ? 
+                              <li onClick={toggleProfileMenu}><img src="" /><Link to='/admin' className="dropMenuLink">Admin</Link></li>
+                              :
+                              <div></div>
+
+                            }
                         </ul>
                     </div>
                 </div>
@@ -104,6 +111,7 @@ function App() {
             <Route exact path='/orders' element={<Orders/>}/>
             <Route exact path='/paymentSuccess' element={<PaymentSuccess/>}/>
             <Route exact path='/orders/:orderId' element={<OrderItems />}/>
+            <Route exact path='/admin' element={<Admin />}/>
           </Routes>
         </body>
       </div>

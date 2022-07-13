@@ -6,7 +6,6 @@ export const fetchProducts = async (category) => {
     let response;
     if(category!='All Products'){
       response = await API.get(`products?category=${category}`);
-      console.log(response);
     }else{
        response = await API.get(`products`);
     }

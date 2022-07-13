@@ -3,7 +3,6 @@ import API from './client';
 export const register=async (data)=>{
     try{
         const response=await API.post('auth/register',data);
-        console.log(response);
         
         return response.data;
         

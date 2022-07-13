@@ -3,6 +3,7 @@ import './Orders.css';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrders } from "../../store/orders/orderActions";
 import Order from "../Order/Order";
+import { Link } from "react-router-dom";
 
 function Orders(){
 
@@ -18,7 +19,9 @@ function Orders(){
     },[]);
     return(
         <div className="ordersPage">
-            <div className="ordersContainer">
+            <Link to="/" className="returnHome">Return Home</Link>
+            <div className="ordersWrapper">
+                <div className="ordersContainer">
                 <h1 className="ordersTableTitle">Your orders</h1>
                 {
                     !orders.length ? null
@@ -41,20 +44,10 @@ function Orders(){
                     })
                     }
                     </tbody>
-                    {/* <tr>
-                        <td>Alfreds Futterkiste</td>
-                        <td>Maria Anders</td>
-                        <td>Germany</td>
-                        
-                    </tr>
-                    <tr>
-                        <td>Centro comercial Moctezuma</td>
-                        <td>Francisco Chang</td>
-                        <td>Mexico</td>
-                    </tr> */}
                 </table>
                     
                 }
+            </div>
             </div>
         </div>
     )
