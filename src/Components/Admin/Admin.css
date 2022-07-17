@@ -58,9 +58,9 @@
 .navigationAdmin ul li a:hover{
     background-color: aqua;
 }
-.navigationAdmin ul li a:active{
+/* .navigationAdmin ul li a:active{
     background-color: aqua;
-}
+} */
 .navigationAdmin ul li  a .adminActive{
     border-radius: 0.5em;
     padding: 0.5em;

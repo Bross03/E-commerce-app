@@ -12,6 +12,7 @@ module.exports=(app)=>{
     router.get('/',async (req,res,next)=>{
         try{
         const orders= await orderHelperInstance.getAllOrders();
+        console.log(orders);
         res.status(200).send(orders);
         }catch(err){
             res.status(500).send(err);
@@ -37,8 +38,6 @@ module.exports=(app)=>{
     router.get('/mine/:id', async (req,res,next)=>{
         if(req.session.passport?.user){
             const items=await orderHelperInstance.getItemsFromUserOrder(req.params.id, req.session.passport.user);
-            console.log('yoyoyoyoyooyoy')
-            console.log(items);
             if(items){
                 res.send(items);
             }else{
@@ -50,14 +49,30 @@ module.exports=(app)=>{
         }
     })
     
-    //get a specific order
     router.get('/:id',async (req,res,next)=>{
+        if(req.session.passport?.user==1){
         const order=await orderHelperInstance.getOrderById(req.params.id);
-        if(order){
-            res.send(order);
+            if(order){
+                res.send(order);
+            }else{
+                res.status(404).send('Order was empty');
+            }
+        }else{
+            res.status(500).send("You must be an admin in to access this path");
         }
-        else{
-        res.status(500).send('Order does not exist');
+    });
+
+    //get a specific order
+    router.get('/:id/items',async (req,res,next)=>{
+        if(req.session.passport?.user==1){
+        const items=await orderHelperInstance.getItemsFromUserOrder(req.params.id, req.session.passport.user);
+            if(items){
+                res.send(items);
+            }else{
+                res.status(404).send('Order was empty');
+            }
+        }else{
+            res.status(500).send("You must be an admin in to access this path");
         }
     });
 

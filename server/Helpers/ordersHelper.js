@@ -2,6 +2,7 @@ const dbQuery=require('../dbQueries.js');
 const pgp = require('pg-promise')({ capSQL: true });
 const moment=require('moment');
 const util=require('../util/util.js');
+const { user } = require('pg/lib/defaults.js');
 const utilInstance=new util();
 
 module.exports=class orderHelper{
@@ -79,15 +80,9 @@ module.exports=class orderHelper{
 
     async getAllOrders(){
         try{
-        const statement=`SELECT order_id, email, status, products.name, qty, 
-        products.price AS price_per_product,
-        orders.total AS total_price, created, modified FROM orders 
-        JOIN order_items ON
-        orders.id=order_items.order_id 
-        JOIN products ON 
-        order_items.product_id=products.id
-        JOIN users ON 
-        orders.user_id=users.id;`
+        const statement=`SELECT orders.id, orders.total, orders.status,
+        orders.created, orders.modified, users.email FROM orders
+       JOIN users ON orders.user_id=users.id;`
 
         const orders=await dbQuery(statement);
         if(orders.rows?.length){
@@ -101,7 +96,9 @@ module.exports=class orderHelper{
     };
 
     async getOrderById(id){
-        const order= await dbQuery("SELECT * FROM orders WHERE id=$1", [id]);
+        const order= await dbQuery(`SELECT orders.id, orders.total, orders.status,
+        orders.created, orders.modified, users.email FROM orders, users WHERE orders.id=$1 AND users.id=orders.user_id;
+        `, [id]);
         if(order.rows?.length){
             return order.rows[0];
         }
@@ -151,10 +148,13 @@ module.exports=class orderHelper{
         }
     }
     async getItemsFromUserOrder(order_id,user_id){
+        
+        if(user_id!=1){
         const exists= this.doesUserHaveThisOrder(order_id, user_id);
-        if(!exists){
-            console.log('not authorized');
-            return null;
+            if(!exists){
+                console.log('not authorized');
+                return null;
+            }
         }
         const statement=`SELECT products.name,
          order_items.qty,products.price FROM order_items, products WHERE

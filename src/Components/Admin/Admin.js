@@ -2,17 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import './Admin.css';
+import AdminTable from "../AdminTable/AdminTable";
 
 function Admin() {
     const {user}=useSelector(state=>state.auth);
-    const {products}=useSelector(state=>state.products);
-    const [category,setCategory]=useState('');
+    const [category,setCategory]=useState('Products');
+
     let isUserAdmin=user.id==1;
-    
+    useEffect(()=>{
+        document.getElementById("productTag").classList.add('adminActive');
+    },[])
     const toggleActive=(e)=>{
         const newCategory=e.target.innerText;
-        setCategory(newCategory);
         const activeElement=document.querySelector(".adminActive");
+        setCategory(newCategory);
         activeElement.classList.remove('adminActive');
         e.target.classList.add("adminActive")
     }
@@ -24,7 +27,7 @@ function Admin() {
                 <div className="navigationAdmin">
                     <ul>
                         <li >
-                            <a href="#" onClick={toggleActive} className="adminActive">
+                            <a href="#" onClick={toggleActive} id="productTag" className="adminActive">
                                 <span className="adminIcon"></span>
                                 <span className="adminTitle">Products</span>
                             </a>
@@ -43,34 +46,7 @@ function Admin() {
                         </li>
                     </ul>
                 </div>  
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Product ID</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                     {
-                        products.length?
-
-                        products.map(product=>{
-                           return <tr>
-                                <td>{product.id}</td>
-                                <td>{product.name}</td>
-                                <td>${product.price}</td>
-                                <td>{product.description}</td>
-                            </tr>
-                        })
-                        :
-                        <td>
-                          
-                        </td>
-                     }
-                    </tbody>
-                </table> 
+                <AdminTable element={category}/>
             </div>
             :
             <div className="notAdmin">

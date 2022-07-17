@@ -1,4 +1,3 @@
-
 import './App.css';
 import React, { useEffect } from 'react';
 import { Link, Route, Routes, useLocation } from "react-router-dom";
@@ -11,11 +10,11 @@ import { checkLoginStatus, logoutUser } from './store/auth/authActions';
 import Cart from './Components/Cart/Cart';
 import PaymentSuccess from './Components/PaymentSuccess/PaymentSuccess';
 import { createCart, findUserCart } from './store/cart/cartActions';
-import { findCartById } from './Api/cart';
 import Checkout from './Components/Checkout/Checkout';
 import Orders from './Components/Orders/Orders';
 import OrderItems from './Components/OrderItems/OrderItems';
 import Admin from './Components/Admin/Admin';
+import AdminOrderItems from './Components/AdminOrderItems/AdminOrderItems';
 
 function App() {
 
@@ -112,6 +111,7 @@ function App() {
             <Route exact path='/paymentSuccess' element={<PaymentSuccess/>}/>
             <Route exact path='/orders/:orderId' element={<OrderItems />}/>
             <Route exact path='/admin' element={<Admin />}/>
+            <Route exact path='/admin/orders/:orderId' element={<AdminOrderItems />}/>
           </Routes>
         </body>
       </div>

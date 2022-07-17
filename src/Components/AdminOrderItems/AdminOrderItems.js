@@ -1,37 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import './OrderItems.css';
-import { getOrderItems } from "../../Api/order";
-import { useSelector } from "react-redux";
+import {  useParams, useNavigate } from "react-router-dom";
 
-function OrderItems(){
+import { getAllOrders, getOrderById, getOrderItemsById } from "../../Api/order";
+
+function AdminOrderItems(){
 
     const navigate=useNavigate();
-
     const {orderId}=useParams();
-    
-    
-    const {orders}=useSelector(state=>state.order);
+    //const [orders, setOrders]=useState([]);
     const [orderItems,setOrderItems]=useState([]);
     const [order,setOrder]=useState({});
-    //const {orderItems}=useSelector(state=>state.order);
 
-    //might have to make a call to the api directly and use react states 
-    //having the problem where the first rendering does not load like the sign up and log in
+    async function fetchOrderItems(){
+        const items= await getOrderItemsById(orderId);
+        setOrderItems(items);
+        return items;
+    }
+    async function fetchOrder(){
+            const orderReceived= await getOrderById(orderId);
+            setOrder(orderReceived)
+            return orderReceived;
+    }
+    
+
     useEffect(()=>{
-        async function fetchOrderItems(){
-           const items= await getOrderItems(orderId);
-           console.log(items)
-           setOrderItems(items);
-           return;
-        }
+        fetchOrder();
         fetchOrderItems();
-        if(orders.length){
-            const selectedOrder=orders.filter(order=>{
-                return order.id==orderId;
-            })
-            setOrder(selectedOrder);
-        }
     },[orderId]);
     const calculateTotal=()=>{
         let price=0;
@@ -45,7 +39,7 @@ function OrderItems(){
     }
     const dateManagment=()=>{
         var options = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' };
-        var date  = new Date(order[0].created);
+        var date  = new Date(order.created);
         return date.toLocaleDateString("en-US", options); // Saturday, September 17, 2016
         }
 
@@ -53,17 +47,17 @@ function OrderItems(){
         <div className="orderItemsPage">
            <div className="orderItemsContainer">
             {
-                orderItems.length && orders.length?
+                orderItems.length && order?
                 <div>
                     <div className="orderHeader">
                         <p className="status">
-                            Status: {order[0].status}
+                            Status: {order.status}
                         </p>
                         <p className="orderId">
-                            ID: {order[0].id}
+                            ID: {order.id}
                         </p>
                         <p className="emailOrder">
-                            Email: {order[0].email}
+                            Email: {order.email}
                         </p>
                         <p className="dateOrderItem">
                             Created: {dateManagment()}
@@ -97,4 +91,4 @@ function OrderItems(){
     )
 }
 
-export default OrderItems;
+export default AdminOrderItems;

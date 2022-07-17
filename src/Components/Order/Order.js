@@ -4,6 +4,8 @@ import './Order.css';
 
 function Order(props){
     const order=props.order;
+    const origin=props.origin;
+    const isOriginAdmin=(origin == 'admin');
     const dateManagment=()=>{
         var options = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' };
         var date  = new Date(order.created);
@@ -18,7 +20,11 @@ function Order(props){
             }</td>
             <td>{order.status}</td> 
             <td>${order.total}</td> 
-            <td><Link to={`/orders/${order.id}`}>See order</Link></td>             
+            {isOriginAdmin?
+            <td><Link to={`/admin/orders/${order.id}`}>See order</Link></td>
+            :
+            <td><Link to={`/orders/${order.id}`}>See order</Link></td>
+            }             
         </tr>
     )
 }

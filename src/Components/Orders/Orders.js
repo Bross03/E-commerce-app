@@ -40,7 +40,7 @@ function Orders(){
                     <tbody>
                     {
                     orders.map(order=>{
-                        return <Order order={order} key={order.id}/>
+                        return <Order order={order} key={order.id} origin='userOrders'/>
                     })
                     }
                     </tbody>
