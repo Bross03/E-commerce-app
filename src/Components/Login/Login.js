@@ -96,7 +96,7 @@ function Login(){
                   <div className="googleButton" onClick={googleLogin}>Google</div>    
                 </div>
             </div>
-            <p className="signup">Don't have an account?<Link to="/signup" className="signUpLink">Sign up here.</Link></p>
+            <p className="signup">Don't have an account? <Link to="/signup" className="signUpLink">Sign up here.</Link></p>
         </div>
     )
 }

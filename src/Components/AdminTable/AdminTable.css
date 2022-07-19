@@ -1,0 +1,8 @@
+.productsTable{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.createProduct{
+    margin:1em;
+}

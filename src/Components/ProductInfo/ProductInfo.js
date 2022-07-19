@@ -55,24 +55,14 @@ function ProductInfo(){
                         {/* <div className="ratings">reviews but we can figure that out later</div> */}
                         <div className="productDetails">
                             <h2>About this item:</h2>
-                            <p className="descriptionProduct">{productSelected.description} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            <div className="size">
-                                <h2>Choose your size</h2>
-                                <ul className="sizes">
-                                    <li>XS</li>
-                                    <li>S</li>
-                                    <li>M</li>
-                                    <li>L</li>
-                                    <li>XL</li>
-                                </ul>
-                            </div>
+                            <p className="descriptionProduct">{productSelected.description}</p>
                             <ul className="productDetailList">
                                 <li>In stock:
                                     {
-                                    productSelected.in_stock>0 ? 
+                                    (productSelected.in_stock-quantity)>=0 ? 
                                     <span className="inStock"> Yes</span>
                                 :
-                                <span className="notInStock"> No</span>
+                                    <span className="notInStock"> No</span>
                                 }
                                     </li>
                                 <li>Category: <span>{productSelected.category}</span></li>

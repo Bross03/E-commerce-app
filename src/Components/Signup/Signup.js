@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { checkLoginStatus } from "../../store/auth/authActions";
 
 import { login, register } from "../../Api/auth";
-import { loadCart } from "../../Api/cart";
 import { createCart } from "../../store/cart/cartActions";
 
 function Signup(){
@@ -89,6 +88,8 @@ function Signup(){
             setPassword('');
             setFirstName('');
             setLastName('');
+
+            message.classList.remove('active');
             navigate('/');
 
             return;
@@ -130,10 +131,10 @@ function Signup(){
                 </div>    
                 <form className="signupForm" onSubmit={onSubmitSignup}>
                     <div className="name">
-                        <input className="firstName" type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input>
-                        <input className="lastName" type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)}></input>
+                        <input maxlength="50" className="firstName" type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input>
+                        <input  maxlength="50" className="lastName" type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)}></input>
                     </div>
-                    <input className="longinput email" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+                    <input maxlength="50" className="longinput email" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
                     <input className="longinput password" 
                     type="password" placeholder="Password" 
                     value={password} onChange={(e) => setPassword(e.target.value)}></input>
@@ -149,7 +150,7 @@ function Signup(){
                   <div className="googleButton" onClick={googleLogin}>Google</div>
                 </div>
             </div>
-            <p className="login">Already have an account?<Link to="/login" className="loginLink">Login here.</Link></p>
+            <p className="login">Already have an account? <Link to="/login" className="loginLink">Login here.</Link></p>
         </div>
     );
 }

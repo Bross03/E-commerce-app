@@ -53,7 +53,7 @@ function Cart(){
                 <h3 className="cartHeading">Your cart</h3>
                 {
                     cartItems.length ? (
-                <div className="cartItems">
+                <div className="cartItemsOnCart">
                     {cartItems.map((cartItem)=>{
                         return <CartItem item={cartItem} key={cartItem.id}/>
                     })}

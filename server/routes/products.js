@@ -56,9 +56,10 @@ module.exports=(app)=>{
     //update product
     router.put('/:productid', async (req,res,next)=>{
         try{
+            if(req.session.passport?.user){
             let correctFormat=true;
             for(const i in req.body){
-                if(i!="price" && i!="name" && i!="description"){
+                if(i!="price" && i!="name" && i!="description" && i!="in_stock" && i!="category"){
                     correctFormat=false;
                 }
             }
@@ -77,6 +78,9 @@ module.exports=(app)=>{
             }else{
                 res.status(400).send("Bad request");
             }
+        }else{
+            res.status(500).send('Only admins can access this path');
+        }
         
         }catch(err){
             res.status(500).send(err)

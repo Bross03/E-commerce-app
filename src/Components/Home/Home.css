@@ -2,9 +2,10 @@
 .sidebar{
     position: absolute;
     transform: translateX(-30em);
-    width:14em;
-    background-color: rgb(176, 176, 176);
-    height:100%;
+    width:12em;
+    background-color: #b0b0b0;
+    transition: 0.3s;
+    border-bottom-right-radius: 1em ;
 }
 .sidebar.open{
     transform:translateX(0);
@@ -19,6 +20,12 @@
     position:absolute;
     right:1em;
     top:0.7em;
+    transition: 0.3s;
+}
+.close:hover{
+    background-color: grey;
+    color:white;
+    font-size: 1.05em;
 }
 h3{
     margin:.5em;
@@ -33,7 +40,7 @@ ul{
 }
 .action{
     position: fixed;
-    top:0.5em;
+    top:0.25em;
     right:1em;
 }
 .action .profile{
@@ -46,7 +53,7 @@ ul{
 }
 .action .dropMenu{
     position:absolute;
-    top:3.25em;
+    top:3.5em;
     right:-1em;
     color:black;
     padding:1em 2em;
@@ -101,3 +108,46 @@ ul{
 .action .dropMenu ul li:hover .dropMenuLink{
     color:fuchsia;
 }
+.sidebar ul{
+    display:flex;
+    flex-direction: column;
+}
+.sidebar ul li{
+    list-style: none;
+    padding:0.5em 0;
+    border-top:1px solid rgba(0, 0, 0, 0.5);
+    direction: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sidebar ul li a {
+    display:inline-block;
+    text-decoration: none;
+    color:rgb(20, 20, 20);
+    transition:0.2s;
+  }
+  .sidebar ul li:hover a {
+    color:fuchsia;
+  }
+  @media only screen and (max-width: 500px) {
+    .sidebar{
+        position: absolute;
+        transform: translateX(-30em);
+        width:100%;
+        transition: 0.5s;
+        border-bottom-right-radius: 0 ;
+        
+    }
+    .sidebar ul{
+        height:100%;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-around;
+        
+    }
+    .sidebar ul li {
+        text-align: center;
+        font-size:1.25em;
+    }
+ 
+  }

@@ -28,7 +28,7 @@ module.exports=class productHelper{
         const newId = await utilInstance.createNewId('products');
         const stringNewId=newId.toString();
         data={...data, 'id': stringNewId};
-        if(data.price && data.name && data.description){
+        if(data.price && data.name && data.description && data.category && data.in_stock){
         const query=pgp.helpers.insert(data, null, 'products');
         await dbQuery(query);
         const newProduct= await this.findProductById(newId);

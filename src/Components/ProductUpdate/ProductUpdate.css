@@ -1,0 +1,40 @@
+.productUpdatePage{
+    background-color: rgb(17, 194, 194);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    height:100vh;
+    top:2.6em;
+    width:100%;
+}
+.updateCard{
+    width: 350px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.updateForm{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: space-around;
+    padding:1em;
+    margin-bottom: 1em;
+}
+.shortInput{
+    max-width:45%;
+}
+.shorterInputs{
+    display: flex;
+    width:100%;
+    justify-content: space-between;
+}
+#prodDescription{
+    width:100%;
+    height:5em;
+    resize:none;
+    margin-bottom: 1em;
+}

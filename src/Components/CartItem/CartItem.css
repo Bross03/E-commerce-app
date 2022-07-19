@@ -1,5 +1,5 @@
 .cartItem{
-    width:90%;
+    width:97%;
     margin:1em auto;
     display:flex;
     justify-content: space-between;
@@ -38,25 +38,22 @@
 }
 
 .counterCartItem{
-    width:15%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 .counterBtn{
-    width:2em;
-    height:2em;
-    border-radius: 100%;
-    background-color: lightgrey;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5em;
+    font-size: 2em;
+    
     font-weight: 900;
     cursor: pointer;
 }
+.counterBtn:hover{
+    color:fuchsia;
+}
 .quantityCartItem{
-    font-size: 1.5em;
+    font-size: 2em;
+    margin:0 0.25em;
     font-weight: 900;
 }
 .priceCartItem{
@@ -72,4 +69,15 @@
     color:red;
     cursor:pointer;
     text-decoration: underline;
+}
+@media only screen and (max-width: 600px) {
+    .titleCartItem{
+        font-size: 1.1em;
+    }
+    .subtitleCartItem{
+        font-size: 0.7em;
+    }
+    .priceCartItem{
+        margin-left: 0.4em;
+    }
 }

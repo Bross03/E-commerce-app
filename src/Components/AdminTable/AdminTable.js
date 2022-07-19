@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { getAllOrders } from "../../Api/order";
 import { getAllUsers } from "../../Api/user";
+import { loadProductList } from "../../store/products/productActions";
 import Order from "../Order/Order";
+import './AdminTable.css';
 
 function AdminTable(props) {
+    const dispatch=useDispatch();
+
     let isProductActive=props.element == 'Products';
     let isUsersActive=props.element == 'Users';
     let isOrdersActive=props.element == 'Orders';
@@ -21,8 +26,14 @@ function AdminTable(props) {
         const response=await getAllOrders();
         setOrders(response);
     }
-
+    
     useEffect(()=>{
+        async function loadProducts(){
+            if(!products.length){
+            await dispatch(loadProductList('All Products'));
+            }
+        }
+        loadProducts();
         if(isUsersActive){
             getUsers();
         }else if(isOrdersActive){
@@ -33,6 +44,8 @@ function AdminTable(props) {
         <div>
             {
                 isProductActive ?
+                <div className="productsTable">
+                    <Link className="createProduct" to='/admin/products/create'>Create New Product</Link>
                     <table>
                         <thead>
                         <tr>
@@ -40,6 +53,7 @@ function AdminTable(props) {
                             <th>Name</th>
                             <th>Price</th>
                             <th>Description</th>
+                            <th>Update</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -52,6 +66,7 @@ function AdminTable(props) {
                                     <td>{product.name}</td>
                                     <td>${product.price}</td>
                                     <td>{product.description}</td>
+                                    <td><Link to='/admin/products/update' className="updateProduct">Update Product</Link></td>
                                 </tr>
                             })
                             :
@@ -62,6 +77,7 @@ function AdminTable(props) {
                         </tbody>
                 
                     </table>
+                </div>
                 :
                 <div>
                 {

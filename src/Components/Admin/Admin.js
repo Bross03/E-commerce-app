@@ -8,9 +8,11 @@ function Admin() {
     const {user}=useSelector(state=>state.auth);
     const [category,setCategory]=useState('Products');
 
-    let isUserAdmin=user.id==1;
+    let isUserAdmin=user?.id==1;
     useEffect(()=>{
+        if(isUserAdmin){
         document.getElementById("productTag").classList.add('adminActive');
+        }
     },[])
     const toggleActive=(e)=>{
         const newCategory=e.target.innerText;
