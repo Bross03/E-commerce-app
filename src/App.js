@@ -28,8 +28,10 @@ function App() {
     const {isCartAuthenticated}=useSelector(state=>state.cart)
     const handleLogout=async ()=>{
       try{
-      await dispatch(logoutUser());
-      toggleProfileMenu();
+        document.querySelector(".loaderWrapper").classList.add("active");
+        await dispatch(logoutUser());
+        document.querySelector(".loaderWrapper").classList.remove("active");
+        toggleProfileMenu();
       }catch(err){
           return err;
       }
@@ -38,10 +40,17 @@ function App() {
     async function isLoggedIn() {
       try{
         await dispatch(checkLoginStatus());
-      if(!isCartAuthenticated){
-        await dispatch(findUserCart());
-        await dispatch(createCart());
-      }
+        if(!isCartAuthenticated && isAuthenticated){
+          {
+            try{
+              console.log('try')
+              await dispatch(findUserCart());
+            }catch(err){
+              console.log('catch')
+              await dispatch(createCart());
+            }
+          }
+        }
       }catch(err){
         return err;
       }
@@ -54,6 +63,20 @@ function App() {
     const toggleProfileDropMenu=document.querySelector('.dropMenu');
     toggleProfileDropMenu.classList.toggle('active');
   }
+  const handleMyCart=async ()=>{
+    if(!isCartAuthenticated && isAuthenticated){
+      {
+        try{
+          console.log('try')
+          await dispatch(findUserCart());
+        }catch(err){
+          console.log('catch')
+          await dispatch(createCart());
+        }
+      }
+    }
+    toggleProfileMenu
+  }
   const toggleMenu=()=>{
     const sidebar= document.querySelector(".sidebar");
     sidebar.classList.toggle('open');
@@ -64,7 +87,11 @@ function App() {
 }
   return (
       <div className="App">
-        <body>
+         <div className='loaderWrapper'>
+            <div className='loader'>
+            </div>
+          </div>
+        <div className='body'>
         <nav>   
                 {
                 isLocationHome ?
@@ -85,7 +112,7 @@ function App() {
                     </div>
                     <div className="dropMenu">
                         <ul>
-                            <li onClick={toggleProfileMenu}><img src="" /><Link to='/cart' className="dropMenuLink">My cart</Link></li>
+                            <li onClick={handleMyCart}><img src="" /><Link to='/cart' className="dropMenuLink">My cart</Link></li>
                             <li onClick={toggleProfileMenu}><img src="" /><Link to='/orders' className="dropMenuLink">My orders</Link></li>
                             <li onClick={toggleProfileMenu}><img src="" /><Link to='/' className="dropMenuLink" onClick={handleLogout}>Logout</Link></li>
                             {
@@ -119,7 +146,8 @@ function App() {
             <Route exact path='/admin/products/update' element={<ProductUpdate />}/>
             <Route exact path='/admin/products/create' element={<NewProduct />}/>
           </Routes>
-        </body>
+         
+        </div>
       </div>
     
   );

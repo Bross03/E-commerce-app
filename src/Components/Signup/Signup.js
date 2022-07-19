@@ -78,10 +78,12 @@ function Signup(){
                 message.innerHTML='Passwords do not match';
                 return;
             }
+            document.querySelector(".loaderWrapper").classList.add("active");
             await register(data);
             await login(loginData);
             await dispatch(checkLoginStatus());
             await dispatch(createCart());
+            document.querySelector(".loaderWrapper").classList.remove("active");
 
             setEmail('');
             setConfirmPassword('');
@@ -113,13 +115,7 @@ function Signup(){
             console.log(err);
         }
     }
-    const githubLogin=()=>{
-        try{
-        window.open('http://localhost:4000/api/auth/github','_self')
-        }catch(err){
-            console.log(err);
-        }
-    }
+
     
     return(
         <div className="signUpPage">

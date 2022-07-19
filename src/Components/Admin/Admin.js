@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import './Admin.css';
 import AdminTable from "../AdminTable/AdminTable";
 
@@ -11,7 +11,7 @@ function Admin() {
     let isUserAdmin=user?.id==1;
     useEffect(()=>{
         if(isUserAdmin){
-        document.getElementById("productTag").classList.add('adminActive');
+        document.querySelector(".adminProduct").classList.add('adminActive');
         }
     },[])
     const toggleActive=(e)=>{
@@ -29,7 +29,7 @@ function Admin() {
                 <div className="navigationAdmin">
                     <ul>
                         <li >
-                            <a href="#" onClick={toggleActive} id="productTag" className="adminActive">
+                            <a href="#" onClick={toggleActive} id="productTag" className="adminProduct">
                                 <span className="adminIcon"></span>
                                 <span className="adminTitle">Products</span>
                             </a>

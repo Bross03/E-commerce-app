@@ -44,12 +44,12 @@ function Login(){
             return;
         }
         
+        document.querySelector(".loaderWrapper").classList.add("active")
         await login(data);
-        
         await dispatch(checkLoginStatus());
         await dispatch(createCart());
         await dispatch(findUserCart());
-        
+        document.querySelector(".loaderWrapper").classList.remove("active")
         message.classList.remove('active');
         navigate('/');
             

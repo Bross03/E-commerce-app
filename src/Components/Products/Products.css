@@ -3,3 +3,47 @@
     justify-content: space-around;
     flex-wrap: wrap;
 }
+.nameLoad,.priceLoad,.linkLoad{
+    background-color: #EEEEEE;
+    border-radius: 0.75em;
+}
+.imageLoad:before{
+    background: linear-gradient(to right, transparent 0%, #E8E8E8 50%, transparent 100%);
+    animation: load 1s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+}
+.imageLoad{
+    width:20em;
+    height:25em;
+    background-color: #EEEEEE;
+}
+.nameLoad{
+    height:2em;
+    width:90%;
+    margin:0.5em auto 0;
+}
+.priceLoad{
+    height:1.5em;
+    width:3em;
+    margin:5%;
+}
+.productLoader{
+    background-color:#FAFAFA;
+    margin:1em;
+    display:flex;
+    flex-direction: column;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.linkLoad{
+    height:3em;
+    width:90%;
+    border-radius: 3em;
+    margin:0.5em auto;
+}
+@keyframes loadProducts {
+    from {
+        left: -150px;
+    }
+    to   {
+        left: 100%;
+    }
+}

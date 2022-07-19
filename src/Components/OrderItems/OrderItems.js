@@ -21,7 +21,6 @@ function OrderItems(){
     useEffect(()=>{
         async function fetchOrderItems(){
            const items= await getOrderItems(orderId);
-           console.log(items)
            setOrderItems(items);
            return;
         }

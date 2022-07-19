@@ -152,7 +152,6 @@ module.exports=class orderHelper{
         if(user_id!=1){
         const exists= this.doesUserHaveThisOrder(order_id, user_id);
             if(!exists){
-                console.log('not authorized');
                 return null;
             }
         }

@@ -38,7 +38,7 @@ function ProductInfo(){
         await dispatch(findUserCart());
         navigate('/cart');
         }catch(err){
-            console.log(err);
+
         }
     }
 

@@ -12,7 +12,6 @@ module.exports=(app)=>{
     router.get('/',async (req,res,next)=>{
         try{
         const orders= await orderHelperInstance.getAllOrders();
-        console.log(orders);
         res.status(200).send(orders);
         }catch(err){
             res.status(500).send(err);
@@ -25,11 +24,9 @@ module.exports=(app)=>{
             if(orders){
                 res.send(orders);
             }else{
-                console.log('orders dont exist');
                 res.status(404).send('Orders not fond');
             }
         }else{
-            console.log('not logged in?');
             res.status(500).send("You must be logged in to access this path");
         }
     });

@@ -43,7 +43,6 @@ export const updateProductById=async(id,data)=>{
 }
 export const createProduct=async(data)=>{
   try{
-    console.log(data);
     const response=await API.post(`products`,data)
 
     return response.data;

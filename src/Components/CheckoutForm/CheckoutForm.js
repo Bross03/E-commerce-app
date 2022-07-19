@@ -44,10 +44,14 @@ function CheckoutForm(){
           const cardElement = elements.getElement(CardElement);
           
           const { token } = await stripe.createToken(cardElement);
-    
+          window.scrollTo({
+            top:0
+          });
+          document.querySelector(".loaderWrapper").classList.add("active");
           await dispatch(checkoutCart({cartId: cart.id, paymentInfo: token}));
           await dispatch(createCart());
           await dispatch(findUserCart());
+          document.querySelector(".loaderWrapper").classList.remove("active")
           navigate('/orders');
         } catch(err) {
           throw err;

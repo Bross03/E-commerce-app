@@ -5,8 +5,7 @@ import { createCart, findUserCart, findUserCartItems, retrieveStripeSessionId } 
 const initialState={
     cart:{},
     isCartAuthenticated:false,
-    cartItems:[],
-    stripeSessionId:''
+    cartItems:[]
 }
 
 const cartSlice=createSlice({
@@ -24,10 +23,6 @@ const cartSlice=createSlice({
             state.cart=cart;
             state.isCartAuthenticated=isAuthenticated;
             state.cartItems=cartItems;
-        },
-        [retrieveStripeSessionId.fulfilled]:(state,action)=>{
-            const {stripeSessionId}=action.payload;
-            state.stripeSessionId=stripeSessionId;
         }
     }
 });

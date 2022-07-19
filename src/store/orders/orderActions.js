@@ -6,7 +6,6 @@ export const fetchOrders = createAsyncThunk(
     async (param, thunkAPI) => {
       try {
         const response = await loadOrders();
-        console.log(response);
         return {
           orders:response
         }
@@ -21,7 +20,6 @@ export const fetchOrders = createAsyncThunk(
     async (id, thunkAPI) => {
       try {
         const response = await getOrderItems(id);
-        console.log(response);
         return {
           orderItems:response
         }

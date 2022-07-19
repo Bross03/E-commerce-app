@@ -12,7 +12,9 @@ function Home(props){
     const {products}=useSelector(state=>state.products);
     useEffect(()=>{
         async function load(){
+        
         await dispatch(loadProductList(category));
+    
         }
         load();
         return ()=>{
@@ -46,20 +48,6 @@ function Home(props){
                             
                         </ul>
                     </aside>
-                {/* <div className="action links">
-                    
-                    <div className="dropMenu Category">
-                        <h3>Categories</h3>
-                        <button className="close" onClick={toggleMenu}>X</button>
-                        <ul>
-                            <li><a href="#" onClick={changeCategory}>All Products</a></li>
-                            <li><a href="#" onClick={changeCategory}>Shirts</a></li>
-                            <li><a href="#" onClick={changeCategory}>Shorts</a></li>
-                            <li><a href="#" onClick={changeCategory}>Sweaters</a></li>
-                            <li><a href="#" onClick={changeCategory}>Long Sleeve Shirts</a></li>
-                        </ul>
-                    </div>
-                </div> */}
                 <h1 className="category">{category}</h1>
                 <Products products={products}/>
             </div>

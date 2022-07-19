@@ -21,18 +21,14 @@ import { checkout, findCartById, getItemsOfUsersCart, loadCart } from '../../Api
     'cart/findCart',
     async (params, thunkAPI) => {
       try {
-        console.log('hey');
         const cart = await findCartById();
         const cartItems = await getItemsOfUsersCart();
-        console.log('?')
         return {
           cart:cart,
           isAuthenticated: true,
           cartItems:cartItems
         }
       } catch(err) {
-        console.log('aaaaa');
-        console.log(err);
         throw err;
       }
     }
@@ -42,8 +38,6 @@ import { checkout, findCartById, getItemsOfUsersCart, loadCart } from '../../Api
       async ({ cartId, paymentInfo }, thunkAPI) => {
         try {
           const response = await checkout(cartId, paymentInfo);
-          console.log(response);
-          console.log('heyhey')
           return {
             order: response
           }

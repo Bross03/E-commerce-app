@@ -11,7 +11,6 @@ module.exports=(app)=>{
     
     //get all products or product by category
     router.get('/',async (req,res,next)=>{
-        console.log('is this working')
         try{
         if(req.query.category){
             const products=await productHelperInstance.getProductsByCategory(req.query.category);

@@ -53,8 +53,9 @@ function ProductUpdate(){
                     "category":newProdCategory,
                     "in_stock":newProdInstock
                 }
+                document.querySelector(".productsLoader").classList.add("active");
                 await updateProductById(product.id,data);
-
+                document.querySelector(".productsLoader").classList.remove("active")
                 message.classList.remove('active');
                 navigate('/');
             }else{

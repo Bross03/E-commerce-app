@@ -65,8 +65,6 @@ module.exports= class AuthHelpers{
     };
     async loginWithGoogle(data){
         try{
-            console.log('yo this is data');
-            console.log(data)
             const user=await userHelperInstance.findUserByGoogleId(data.googleID);
             if(!user){
                 const userDataFormatted={

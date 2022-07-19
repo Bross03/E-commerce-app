@@ -7,14 +7,14 @@ export const checkLoginStatus = createAsyncThunk(
   async (param, thunkAPI) => {
     try {
       const response = await isLoggedIn();
-      
-
       return {
         isAuthenticated: true,
         user: response.data.user
       }
     } catch(err) {
-      throw err;
+      return{
+        isAuthenticated:false
+      }
     }
   }
 );

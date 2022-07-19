@@ -11,7 +11,6 @@ module.exports=async function dbQuery(query,params){
         }
         return result;
     }catch(err){
-        console.log(err);
         return err;
     }
     

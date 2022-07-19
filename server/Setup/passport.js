@@ -39,9 +39,6 @@ module.exports=async (app)=>{
     },
     async(accessToken, refreshToken, profile, done)=>{
         try{
-            console.log('is this thing even running?');
-            console.log('profile below')
-            console.log(profile);
             const { email, first_name, last_name, id } = profile._json;
             const userData = {
                 email,
@@ -49,7 +46,6 @@ module.exports=async (app)=>{
                 lastName: last_name,
                 facebookID: id
             };
-            console.log(userData);
             const user=await AuthHelperInstance.loginWithFacebook(userData);
             return done(null, user);
         }catch(err){
@@ -65,9 +61,6 @@ module.exports=async (app)=>{
     },
     async(accessToken, refreshToken, profile, done)=>{
         try{
-            console.log('is this thing even running?');
-            console.log('profile below')
-            console.log(profile);
             const { email, given_name, family_name } = profile._json;
             const {id}=profile;
             const userData = {
@@ -76,7 +69,7 @@ module.exports=async (app)=>{
                 lastName: family_name,
                 googleID: id
             };
-            console.log(userData);
+
             const user=await AuthHelperInstance.loginWithGoogle(userData);
             return done(null, user);
         }catch(err){
