@@ -109,11 +109,31 @@
 .linksProductInfo{
     margin: 1em 0;
 }
-.linksProductInfo .signupLink, .linksProductInfo .loginLink{
+.linksProductInfo .linkSignUp, .linksProductInfo .linkLogIn{
     color:black;
     margin:0 1.5em 0 0;
     width:1em;
-    background-color: aqua;
+     background-color: #68d8d6;;
     padding:0.5em;
     border-radius: 2em;
+    text-decoration: none;
+    transition: 100ms;
+}
+.linksProductInfo .linkSignUp:hover, .linksProductInfo .linkLogIn:hover{
+    background-color: #1f5655;
+    color:white;
+}
+.prodDoesntExist{
+    height:100vh;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: aqua;
+    position:absolute;
+    top:2.6em;
+    width:100%;
+}
+.prodDoesntExist h1{
+    font-size: 3em;
+    max-width: 90%;
 }

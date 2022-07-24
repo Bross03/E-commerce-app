@@ -8,17 +8,22 @@ function Admin() {
     const {user}=useSelector(state=>state.auth);
     const [category,setCategory]=useState('Products');
 
-    let isUserAdmin=user?.id==1;
+    const isUserAdmin=user?.id==1;
     useEffect(()=>{
         if(isUserAdmin){
-        document.querySelector(".adminProduct").classList.add('adminActive');
+        const prod=document.querySelector(".adminProduct");
+        if(prod){
+            prod.classList.add('adminActive');
+        }
         }
     },[])
     const toggleActive=(e)=>{
         const newCategory=e.target.innerText;
         const activeElement=document.querySelector(".adminActive");
         setCategory(newCategory);
+        if(activeElement){
         activeElement.classList.remove('adminActive');
+        }
         e.target.classList.add("adminActive")
     }
     return(
@@ -47,8 +52,9 @@ function Admin() {
                             </a>
                         </li>
                     </ul>
-                </div>  
-                <AdminTable element={category}/>
+                </div>
+                    <AdminTable element={category}/>
+                
             </div>
             :
             <div className="notAdmin">

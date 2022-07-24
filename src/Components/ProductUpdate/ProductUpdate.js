@@ -88,7 +88,7 @@ function ProductUpdate(){
                 <div className="shorterInputs">
                     <div  className="shortInput">
                         <label htmlFor="prodName">Product Name</label>
-                        <input maxlength="50" id="prodName" placeholder={product?.name} value={newProdName} onChange={(e) => setNewProdName(e.target.value)}></input>
+                        <input maxLength="50" id="prodName" placeholder={product?.name} value={newProdName} onChange={(e) => setNewProdName(e.target.value)}></input>
                     </div>
                     <div  className="shortInput">
                         <label htmlFor="prodPrice">Product Price</label>
@@ -98,7 +98,7 @@ function ProductUpdate(){
                 <div className="shorterInputs">
                     <div  className="shortInput">
                         <label htmlFor="prodCategory">Product Category</label>
-                        <input maxlength="50" id="prodCategory" placeholder={product?.category} value={newProdCategory} onChange={(e) => setNewProdCategory(e.target.value)}></input>
+                        <input maxLength="50" id="prodCategory" placeholder={product?.category} value={newProdCategory} onChange={(e) => setNewProdCategory(e.target.value)}></input>
                     </div>
                     <div  className="shortInput">
                         <label htmlFor="prodInstock">In stock</label>
@@ -106,7 +106,7 @@ function ProductUpdate(){
                     </div>
                 </div>
                 <label htmlFor="prodDescription">Product Description</label>
-                <textarea maxlength="300" id="prodDescription" placeholder={product?.description} value={newProdDescription} onChange={(e) => setNewProdDescription(e.target.value)}></textarea>
+                <textarea maxLength="300" id="prodDescription" placeholder={product?.description} value={newProdDescription} onChange={(e) => setNewProdDescription(e.target.value)}></textarea>
                 <button type="submit" className="submitButton">Update</button>
                 </form>
         </div>

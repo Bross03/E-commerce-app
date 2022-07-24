@@ -52,7 +52,6 @@ function ProductInfo(){
                     <div className="descrpition">
                         <h2 className="productTitle">{productSelected.name}</h2>
                         <h4 className="priceInfo">${productSelected.price}</h4>
-                        {/* <div className="ratings">reviews but we can figure that out later</div> */}
                         <div className="productDetails">
                             <h2>About this item:</h2>
                             <p className="descriptionProduct">{productSelected.description}</p>
@@ -80,8 +79,8 @@ function ProductInfo(){
                             <div className="mustLogin">
                                 <h4>You must be logged in to add items to your cart</h4>
                                 <div className="linksProductInfo">
-                                    <Link to='/signup' className="signupLink">Sign Up</Link>
-                                    <Link to='/login' className="loginLink">Log In</Link>
+                                    <Link to='/signup' className="linkSignUp">Sign Up</Link>
+                                    <Link to='/login' className="linkLogIn">Log In</Link>
                                 </div>
                             </div>
                             )
@@ -90,7 +89,10 @@ function ProductInfo(){
                  </div>
                  )
                  :
-                 <p>doesnt exist</p> 
+                 <div className="prodDoesntExist">
+                    <Link to="/" className="returnHome">Return Home</Link>
+                    <h1>This product does not seem to exist</h1>
+                 </div> 
             }
         </div>
     )

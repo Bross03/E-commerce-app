@@ -3,7 +3,7 @@
     width: 100%;
     top:3em;
     height:100vh;
-    background-color: aqua;
+	background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
     display:flex;
 	flex-direction: column;
     align-items: center;
@@ -18,7 +18,7 @@
 	margin: 0 15px 20px;
 	padding: 0;
 	border-style: none;
-	background-color: #7795f8;
+	background-color: #053C5E;
 	will-change: opacity, transform;
 	box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 #829fff;
 	border-radius: 4px;

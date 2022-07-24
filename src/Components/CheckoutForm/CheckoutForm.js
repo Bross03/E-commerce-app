@@ -77,7 +77,7 @@ function CheckoutForm(){
 
               cartItems.map((cartItem)=>{
                 return(
-                  <div>
+                  <div key={cartItem.id}>
                     <div className="cartItemCheckout">
                       <div className="productInfoCheckout">
                         <p className="itemCheckoutQty">{cartItem.qty}x</p>

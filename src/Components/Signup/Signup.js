@@ -127,12 +127,12 @@ function Signup(){
                 </div>    
                 <form className="signupForm" onSubmit={onSubmitSignup}>
                     <div className="name">
-                        <input maxlength="50" className="firstName" type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input>
-                        <input  maxlength="50" className="lastName" type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)}></input>
+                        <input maxLength="50" className="firstName" type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input>
+                        <input  maxLength="50" className="lastName" type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)}></input>
                     </div>
-                    <input maxlength="50" className="longinput email" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+                    <input maxLength="50" className="longinput email" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
                     <input className="longinput password" 
-                    type="password" placeholder="Password" 
+                    type="password" placeholder="Password" minLength="6"
                     value={password} onChange={(e) => setPassword(e.target.value)}></input>
                     <input className="longinput passwordConfirm" 
                     type="password" placeholder="Confirm Password"
@@ -147,6 +147,22 @@ function Signup(){
                 </div>
             </div>
             <p className="login">Already have an account? <Link to="/login" className="loginLink">Login here.</Link></p>
+            <div className="wavesWrapper">
+            <svg className="waves" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
+                <defs>
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g className="parallax">
+                    <use xlinkHref="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                    <use xlinkHref="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                    <use xlinkHref="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                    <use xlinkHref="#gentle-wave" x="48" y="7" fill="#fff" />
+                </g>
+            </svg>
+            <div className="content flex">
+            </div>
+            </div>
         </div>
     );
 }

@@ -50,6 +50,7 @@ function OrderItems(){
 
     return (
         <div className="orderItemsPage">
+            <button onClick={() => navigate(-1)} className="returnOrders">Return to orders</button>
            <div className="orderItemsContainer">
             {
                 orderItems.length && orders.length?
@@ -91,7 +92,7 @@ function OrderItems(){
            <h1>Order was empty</h1>
             }
            </div>
-            <button onClick={() => navigate(-1)} className="returnOrders">Return to orders</button>
+            
         </div>
     )
 }

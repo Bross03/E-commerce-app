@@ -60,7 +60,6 @@ function NewProduct(){
                 "category":prodCategory,
                 "in_stock":prodInstock
             }
-            alert('hey')
             await createProduct(data);
 
                 message.classList.remove('active');
@@ -84,7 +83,7 @@ function NewProduct(){
                 <div className="shorterInputs">
                     <div  className="shortInput">
                         <label htmlFor="prodName">Product Name</label>
-                        <input maxlength="50" id="prodName" placeholder='Name' value={prodName} onChange={(e) => setProdName(e.target.value)}></input>
+                        <input maxLength="50" id="prodName" placeholder='Name' value={prodName} onChange={(e) => setProdName(e.target.value)}></input>
                     </div>
                     <div  className="shortInput">
                         <label htmlFor="prodPrice">Product Price</label>
@@ -94,7 +93,7 @@ function NewProduct(){
                 <div className="shorterInputs">
                     <div  className="shortInput">
                         <label htmlFor="prodCategory">Product Category</label>
-                        <input maxlength="50" id="prodCategory" placeholder='Category' value={prodCategory} onChange={(e) => setProdCategory(e.target.value)}></input>
+                        <input maxLength="50" id="prodCategory" placeholder='Category' value={prodCategory} onChange={(e) => setProdCategory(e.target.value)}></input>
                     </div>
                     <div  className="shortInput">
                         <label htmlFor="prodInstock">In stock</label>
@@ -102,7 +101,7 @@ function NewProduct(){
                     </div>
                 </div>
                 <label htmlFor="prodDescription">Product Description</label>
-                <textarea maxlength="300" id="prodDescription" placeholder='Description' value={prodDescription} onChange={(e) => setProdDescription(e.target.value)}></textarea>
+                <textarea maxLength="300" id="prodDescription" placeholder='Description' value={prodDescription} onChange={(e) => setProdDescription(e.target.value)}></textarea>
                 <button type="submit" className="submitButton">Update</button>
                 </form>
         </div>

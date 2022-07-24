@@ -29,6 +29,9 @@ function App() {
     const handleLogout=async ()=>{
       try{
         document.querySelector(".loaderWrapper").classList.add("active");
+        window.scrollTo({
+          top:0
+        });
         await dispatch(logoutUser());
         document.querySelector(".loaderWrapper").classList.remove("active");
         toggleProfileMenu();
@@ -43,10 +46,8 @@ function App() {
         if(!isCartAuthenticated && isAuthenticated){
           {
             try{
-              console.log('try')
               await dispatch(findUserCart());
             }catch(err){
-              console.log('catch')
               await dispatch(createCart());
             }
           }
@@ -67,10 +68,9 @@ function App() {
     if(!isCartAuthenticated && isAuthenticated){
       {
         try{
-          console.log('try')
           await dispatch(findUserCart());
         }catch(err){
-          console.log('catch')
+
           await dispatch(createCart());
         }
       }
@@ -135,7 +135,6 @@ function App() {
           <Routes >
             <Route exact path="/signup" element={<Signup/>}/>
             <Route exact path="/login" element={<Login/>}/>
-            <Route exact path='/' element={<Home/>}/>
             <Route exact path='/products/:productId' element={<ProductInfo/>}/>
             <Route exact path='/cart' element={<Cart/>}/>
             <Route exact path='/checkout' element={<Checkout/>}/>
@@ -145,6 +144,7 @@ function App() {
             <Route exact path='/admin/orders/:orderId' element={<AdminOrderItems />}/>
             <Route exact path='/admin/products/update' element={<ProductUpdate />}/>
             <Route exact path='/admin/products/create' element={<NewProduct />}/>
+            <Route path='/' element={<Home/>}/>
           </Routes>
          
         </div>

@@ -2,7 +2,7 @@
   position:absolute;
   top:2.6em;
   width:100%;
-  background-color: aqua;
+  background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
   min-height:100vh;
   display: flex;
   flex-direction: column;
@@ -15,9 +15,9 @@
     align-items: center;
 }
 .returnHome{
-  margin:2em auto 0em 2em;
+  margin:2em;
   width:8em;
-  background-color: white;
+  background-color: #68d8d6;
   padding:1em;
   color:black;
   text-decoration: none;
@@ -26,7 +26,8 @@
   transition: 100ms;
 }
 .returnHome:hover{
-  background-color: #ddd;
+  background-color: #1f5655;
+  color:white;
 }
 .ordersContainer{
     width:70%;

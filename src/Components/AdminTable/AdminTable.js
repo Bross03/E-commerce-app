@@ -42,6 +42,7 @@ function AdminTable(props) {
     },[props])
     return(
         <div>
+        <div className="tableCard">
             {
                 isProductActive ?
                 <div className="productsTable">
@@ -89,7 +90,6 @@ function AdminTable(props) {
                         <th>Email</th>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Password</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -102,7 +102,6 @@ function AdminTable(props) {
                                 <td>{user.email}</td>
                                 <td>{user.first_name}</td>
                                 <td>{user.last_name}</td>
-                                <td>{user.password}</td>
                             </tr>
                         })
                         :
@@ -137,6 +136,8 @@ function AdminTable(props) {
                 }
                 </div>
             } 
+           
+        </div>
         </div>
     )
 }

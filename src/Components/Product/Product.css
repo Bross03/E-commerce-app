@@ -25,7 +25,7 @@
 .seeMore{
     margin:0.5em;
     padding:1em;
-    background-color: aqua;
+    background-color: #68d8d6;
     border-radius: 25px;
     text-align: center;
     color:black;
@@ -34,6 +34,6 @@
     transition: 200ms;
 }
 .seeMore:hover{
-    background-color: rgb(3, 167, 167);
+    background-color: #1f5655;
     color:white;
 }

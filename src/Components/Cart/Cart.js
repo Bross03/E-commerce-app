@@ -19,6 +19,7 @@ function Cart(){
             setTotalPrice(price);
         }
     },[cartItems]);
+    
     const handleCheckoutButton=(e)=>{
         e.preventDefault();
         const message=document.querySelector('.messageCart');
@@ -80,8 +81,8 @@ function Cart(){
             <div className="accessDenied">
                 <h1 className="denied">You must be logged in to access your cart</h1>
                 <div className="linksProductInfo">
-                    <Link to='/signup' className="signupLink">Sign Up</Link>
-                    <Link to='/login' className="loginLink">Log In</Link>
+                    <Link to='/signup' className="cartSignUpLink">Sign Up</Link>
+                    <Link to='/login' className="cartLogInLink">Log In</Link>
                 </div>   
             </div>
             }
