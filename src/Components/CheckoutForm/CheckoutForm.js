@@ -43,6 +43,9 @@ function CheckoutForm(){
         try {
           const cardElement = elements.getElement(CardElement);
           
+          if(cardElement._empty || cardElement._invalid){
+            return;
+          }
           const { token } = await stripe.createToken(cardElement);
           window.scrollTo({
             top:0

@@ -17,6 +17,11 @@
     align-items: center;
     
 }
+.signupText{
+    color:grey;
+    z-index: 3;
+    margin:0.5em
+}
 .loginForm{
     display: flex;
     flex-direction:column;
@@ -46,6 +51,7 @@ h2{
     border-radius: 1em;
     padding:0.7em;
     width:10em;
+    margin-top:1em;
     cursor:pointer;
 }
 
@@ -58,7 +64,7 @@ h2{
     margin:0.2em;
 }
 .signUpLink{
-    color:white;
+    color:black;
 }
 .message.active{
     background-color: red;

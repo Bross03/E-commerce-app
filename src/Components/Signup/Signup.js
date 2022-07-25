@@ -146,7 +146,7 @@ function Signup(){
                   <div className="googleButton" onClick={googleLogin}>Google</div>
                 </div>
             </div>
-            <p className="login">Already have an account? <Link to="/login" className="loginLink">Login here.</Link></p>
+            <p className="loginText">Already have an account? <Link to="/login" className="loginLink">Login here.</Link></p>
             <div className="wavesWrapper">
             <svg className="waves" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
             viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">

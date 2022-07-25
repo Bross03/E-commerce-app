@@ -19,7 +19,7 @@ function Cart(){
             setTotalPrice(price);
         }
     },[cartItems]);
-    
+
     const handleCheckoutButton=(e)=>{
         e.preventDefault();
         const message=document.querySelector('.messageCart');
@@ -51,7 +51,17 @@ function Cart(){
                 isCartAuthenticated ?
             <div className="cartContainer">
                 
-                <h3 className="cartHeading">Your cart</h3>
+                <div className="cartHeading">
+                    <h3>Your cart:</h3>
+                    {
+                        cartItems.length ?
+                    <Link to='/' className="headingLink">Continue Shopping</Link>   
+                    :
+                    <div>
+
+                    </div>
+                    }
+                </div>
                 {
                     cartItems.length ? (
                 <div className="cartItemsOnCart">
