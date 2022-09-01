@@ -4,6 +4,8 @@ const util=require('../util/util.js');
 const utilInstance=new util();
 
 module.exports=class productHelper{
+
+    //finds products by Id
     async findProductById(id){
         const product= await dbQuery("SELECT * FROM products WHERE id=$1", [id]);
         if(product.rows?.length){
@@ -11,6 +13,8 @@ module.exports=class productHelper{
         }
         return null;
     };
+
+    //retrieves product id by name
     async getProductIdByName(name){
         const productId= await dbQuery("SELECT id FROM products WHERE name=$1", [name])
         if(productId.rows?.length){
@@ -18,11 +22,14 @@ module.exports=class productHelper{
         }
         return null;
     };
+
+    //gets all products
     async getAllProducts(){
         const products=await dbQuery("SELECT * FROM products");
         return products.rows;
     };
 
+    //post new product
     async createProduct(data){
         try{
         const newId = await utilInstance.createNewId('products');
@@ -41,7 +48,7 @@ module.exports=class productHelper{
         }
     };
 
-
+    //update product
     async updateProduct(id, data){
         try{
         const condition= pgp.as.format("WHERE id = ${id};", {id});
@@ -60,6 +67,8 @@ module.exports=class productHelper{
         }
     };
     
+
+    //retrieve product price by id
     async getPriceById(id){
         try{
             const statement=`SELECT price FROM products WHERE id=$1`;
@@ -76,6 +85,8 @@ module.exports=class productHelper{
             return err;
         }
     }
+
+    //get list of products by category
     async getProductsByCategory(category){
         try{
             const statement=`SELECT * FROM products WHERE category LIKE $1;`;

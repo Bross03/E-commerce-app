@@ -3,6 +3,7 @@ import "./ProductUpdate.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { updateProductById } from "../../Api/product";
+import { loadProductList } from "../../store/products/productActions";
 
 function ProductUpdate(){
     const dispatch=useDispatch();
@@ -19,7 +20,9 @@ function ProductUpdate(){
 
     useEffect(()=>{
         async function loadProducts(){
-            await dispatch(loadProducts());
+            if(!products.length){
+            await dispatch(loadProductList());
+            }
         }
         loadProducts();
     },[])
@@ -51,11 +54,12 @@ function ProductUpdate(){
                     "name":newProdName,
                     "description":newProdDescription,
                     "category":newProdCategory,
-                    "in_stock":newProdInstock
+                    "in_stock":newProdInstock.toString()
                 }
-                document.querySelector(".productsLoader").classList.add("active");
+                console.log(data);
+                document.querySelector(".loaderWrapper").classList.add("active");
                 await updateProductById(product.id,data);
-                document.querySelector(".productsLoader").classList.remove("active")
+                document.querySelector(".loaderWrapper").classList.remove("active")
                 message.classList.remove('active');
                 navigate('/');
             }else{
@@ -63,7 +67,7 @@ function ProductUpdate(){
                 message.innerHTML='You must select a product on the dropdown menu';
             }
         }catch(err){
-
+            console.log(err)
         }
 
     }

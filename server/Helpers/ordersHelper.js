@@ -6,6 +6,8 @@ const { user } = require('pg/lib/defaults.js');
 const utilInstance=new util();
 
 module.exports=class orderHelper{
+
+    //creates new order
     async createOrder(total,user_id){
         try{
          
@@ -33,6 +35,8 @@ module.exports=class orderHelper{
             return err;
         }
     };
+
+    //create order items
     async createOrderItems(user_id, order_id){
         let id;
         let qty;
@@ -62,6 +66,8 @@ module.exports=class orderHelper{
             return null;
         }
     };
+
+    //after order is created, cart is deleted so id is free for user to use
     async deleteCartAndCartItems(user_id){
 
         try{
@@ -78,6 +84,7 @@ module.exports=class orderHelper{
         }
     };
 
+    //retrieves all orders
     async getAllOrders(){
         try{
         const statement=`SELECT orders.id, orders.total, orders.status,
@@ -95,6 +102,7 @@ module.exports=class orderHelper{
         }
     };
 
+    //get order by order id
     async getOrderById(id){
         const order= await dbQuery(`SELECT orders.id, orders.total, orders.status,
         orders.created, orders.modified, users.email FROM orders, users WHERE orders.id=$1 AND users.id=orders.user_id;
@@ -105,6 +113,7 @@ module.exports=class orderHelper{
         return null;
     };
 
+    //get orders by user id
     async getOrderByUserId(user_id){
         const order= await dbQuery(`SELECT orders.id, orders.total, orders.status,
          orders.created, orders.modified, users.email FROM orders
@@ -115,6 +124,7 @@ module.exports=class orderHelper{
         return null;
     };
 
+    //updates order status
     async updateOrder(status,id){
         try{
             
@@ -139,6 +149,8 @@ module.exports=class orderHelper{
                 return err;
             }
     }
+
+    //checks if user has an order
     async doesUserHaveThisOrder(order_id,user_id){
         const exists=await dbQuery('SELECT status FROM orders WHERE orders.id=$1 AND orders.user_id=$2;',[order_id,user_id]);
         if(exists.rows.length){
@@ -147,6 +159,8 @@ module.exports=class orderHelper{
             return false;
         }
     }
+
+    //retrieves order item from specific order
     async getItemsFromUserOrder(order_id,user_id){
         
         if(user_id!=1){

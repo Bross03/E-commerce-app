@@ -5,6 +5,8 @@ const pgp = require('pg-promise')({ capSQL: true });
 
 
 module.exports=class userHelper{
+
+    //find user by email
     async findUserByEmail(email){
         const user= await dbQuery("SELECT * FROM users WHERE email=$1", [email])
         if(user.rows?.length){
@@ -13,6 +15,7 @@ module.exports=class userHelper{
         return null;
     };
 
+    //find user by id
     async findUserById(id){
         const user=await dbQuery("SELECT * FROM users WHERE id=$1", [id])
         if(user.rows?.length){
@@ -21,6 +24,7 @@ module.exports=class userHelper{
         return null;
     };
 
+    //posts new user(register)
     async createUser(data){
         try{
         const newUserId=await utilInstance.createNewId('users');
@@ -36,11 +40,14 @@ module.exports=class userHelper{
         }
     };
 
+    //retrieves information about all users
     async getAllUsers(){
         const users=await dbQuery("SELECT * FROM users");
         return users.rows;
     };
 
+
+    //updates information about user
     async updateUser(id, data){
         try{
             if(data.password){
@@ -61,6 +68,8 @@ module.exports=class userHelper{
             return err;
         }
     };
+
+    //finds user by facebook id
     async findUserByFacebookId(id){
         try{
             const statement=`SELECT * FROM users WHERE facebook->> 'id'=$1`;
@@ -76,6 +85,8 @@ module.exports=class userHelper{
             return err;
         }
     };
+    
+    //finds user by google id
     async findUserByGoogleId(id){
         try{
     

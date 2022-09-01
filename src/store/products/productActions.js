@@ -14,19 +14,7 @@ export const loadProductList = createAsyncThunk(
       }
     }
   );
-  // export const loadProductListWithCategory=createAsyncThunk(
-  //   'products/loadProductsByCategory',
-  //   async (category, thunkAPI) => {
-  //     try {
-  //       const response = await fecthProductsByCategory(category);
-  //       return {
-  //         products: response
-  //       }
-  //     } catch(err) {
-  //       throw err;
-  //     }
-  //   }
-  // );
+ 
 
   export const selectActiveProduct = createAsyncThunk(
     'products/selectProduct',

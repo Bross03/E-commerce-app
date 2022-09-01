@@ -12,6 +12,7 @@ const utilInstance= new util();
 module.exports=class cartHelper{
 
 
+    //finds cart by specific id
     async findCartById(user_id){
         const statement2=`SELECT * FROM carts WHERE id=$1`;
         const cart=await dbQuery(statement2,[user_id]);
@@ -21,6 +22,7 @@ module.exports=class cartHelper{
         return null;
     };
 
+    //creates a new cart to the database
     async createCart(userId){
         const cart= await this.findCartById(userId);
         if(cart){
@@ -37,6 +39,8 @@ module.exports=class cartHelper{
         }
         return null;
     };
+
+    //gets all items in a specific users cart
     async getAllItems(user_id){
         const products=await dbQuery(`SELECT products.name, products.id, products.in_stock,
          cart_items.qty,products.price FROM cart_items, products WHERE
@@ -47,6 +51,8 @@ module.exports=class cartHelper{
             return false;
         }
     }
+
+    //checks if cart contains item and return that item
     async cartHasItem(product_id, user_id){
 
         const product = await dbQuery("SELECT id FROM cart_items WHERE product_id=$1 AND cart_id=$2",[product_id, user_id]);
@@ -57,11 +63,10 @@ module.exports=class cartHelper{
         }
     }
 
+    //adds item to the cart
     async addItemToCart(data, user_id){
         const {productId,qty} =data;
         const id = await utilInstance.createNewId('cart_items');
-
-        //const product_id=await productHelperInstance.getProductIdByName(name);
 
         const itemExists = await this.cartHasItem(productId, user_id);
 
@@ -108,6 +113,8 @@ module.exports=class cartHelper{
             return createdCartItem;
         }
     };
+
+    //calculates cart total price
     async getTotalCartPrice(user_id){
         const statement=`SELECT qty, product_id FROM cart_items WHERE cart_id=$1`;
         const result =await dbQuery(statement,[user_id]);
@@ -118,12 +125,16 @@ module.exports=class cartHelper{
         }
         return sum;
     };
+
+    //removes item from cart
     async deleteProductFromCart(productId, userId){
         const statement=`DELETE FROM cart_items WHERE product_id=$1 AND cart_id=$2;`;
         const result= await dbQuery(statement, [productId,userId]);
         return result;
     };
 
+
+    //uses stripe to checkout user
     async checkout(cartId, userId, paymentInfo){
         try{
         const stripe = require("stripe")(STRIPE_SECRET_KEY);

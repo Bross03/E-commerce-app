@@ -43,7 +43,7 @@
     align-items: center;
 }
 .counterBtn{
-    font-size: 2em;
+    font-size: 1.5em;
     
     font-weight: 900;
     cursor: pointer;
@@ -52,7 +52,7 @@
     color:fuchsia;
 }
 .quantityCartItem{
-    font-size: 2em;
+    font-size: 1.5em;
     margin:0 0.25em;
     font-weight: 900;
 }

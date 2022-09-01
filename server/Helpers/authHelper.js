@@ -42,6 +42,8 @@ module.exports= class AuthHelpers{
             return err;
         }
     };
+
+    //login with facebook
     async loginWithFacebook(data){
         try{
             const user=await userHelperInstance.findUserByFacebookId(data.facebookID);
@@ -63,6 +65,8 @@ module.exports= class AuthHelpers{
             return err;
         }
     };
+
+    //login with google
     async loginWithGoogle(data){
         try{
             const user=await userHelperInstance.findUserByGoogleId(data.googleID);

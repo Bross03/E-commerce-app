@@ -60,7 +60,9 @@ function NewProduct(){
                 "category":prodCategory,
                 "in_stock":prodInstock
             }
+            document.querySelector(".loaderWrapper").classList.add("active");
             await createProduct(data);
+            document.querySelector(".loaderWrapper").classList.remove("active")
 
                 message.classList.remove('active');
                 navigate('/');
