@@ -75,7 +75,7 @@ function App() {
         }
       }
     }
-    toggleProfileMenu
+    toggleProfileMenu();
   }
   const toggleMenu=()=>{
     const sidebar= document.querySelector(".sidebar");

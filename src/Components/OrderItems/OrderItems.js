@@ -14,10 +14,7 @@ function OrderItems(){
     const {orders}=useSelector(state=>state.order);
     const [orderItems,setOrderItems]=useState([]);
     const [order,setOrder]=useState({});
-    //const {orderItems}=useSelector(state=>state.order);
 
-    //might have to make a call to the api directly and use react states 
-    //having the problem where the first rendering does not load like the sign up and log in
     useEffect(()=>{
         async function fetchOrderItems(){
            const items= await getOrderItems(orderId);

@@ -25,6 +25,7 @@ const authSlice=createSlice({
             state.error=null;
         },
         [checkLoginStatus.rejected]:(state,action)=>{
+
             const {isAuthenticated}=action.payload;
             state.isAuthenticated=isAuthenticated;
         },

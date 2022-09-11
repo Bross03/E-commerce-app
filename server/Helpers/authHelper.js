@@ -11,12 +11,14 @@ module.exports= class AuthHelpers{
         try{
             const {email}=data;
             const user=await userHelperInstance.findUserByEmail(email);
+           
             if(user){
                return null;
             }
             data.password=await utilInstance.passwordHash(data.password);
             await userHelperInstance.createUser(data);
             const newUser=await userHelperInstance.findUserByEmail(email);
+    
             return newUser;
         }catch(err){
             return err;
@@ -27,10 +29,9 @@ module.exports= class AuthHelpers{
     async login(data){
 
         const {email,password}=data;
-
         try{
             const user=await userHelperInstance.findUserByEmail(email);
-            
+
             if(!user){
                 return false;
             }

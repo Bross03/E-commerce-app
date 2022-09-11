@@ -44,7 +44,9 @@ function Login(){
             return;
         }
         
-        document.querySelector(".loaderWrapper").classList.add("active")
+        document.querySelector(".loaderWrapper").classList.add("active");
+   
+        
         await login(data);
         await dispatch(checkLoginStatus());
         await dispatch(createCart());
@@ -54,6 +56,7 @@ function Login(){
         navigate('/');
             
         }catch(err){
+            document.querySelector(".loaderWrapper").classList.remove("active")
             message.classList.add('active');
             message.innerHTML='Email or password are incorrect';
         }

@@ -56,13 +56,14 @@ function ProductUpdate(){
                     "category":newProdCategory,
                     "in_stock":newProdInstock.toString()
                 }
-                console.log(data);
+              
                 document.querySelector(".loaderWrapper").classList.add("active");
                 await updateProductById(product.id,data);
                 document.querySelector(".loaderWrapper").classList.remove("active")
                 message.classList.remove('active');
                 navigate('/');
             }else{
+                document.querySelector(".loaderWrapper").classList.remove("active")
                 message.classList.add('active');
                 message.innerHTML='You must select a product on the dropdown menu';
             }

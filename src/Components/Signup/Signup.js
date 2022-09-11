@@ -96,7 +96,7 @@ function Signup(){
 
             return;
         }catch(err){
-            
+            document.querySelector(".loaderWrapper").classList.remove("active")
             message.classList.add('active');
             message.innerHTML=err;
         }

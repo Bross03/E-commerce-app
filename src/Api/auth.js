@@ -14,6 +14,7 @@ export const register=async (data)=>{
 export const login=async (data)=>{
     try{
         const response=await API.post('auth/login',data);
+        
         return response;
     }catch(err){
         throw err.response.data

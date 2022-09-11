@@ -17,6 +17,7 @@ module.exports=(app, passport)=>{
     router.post('/register', async (req, res, next) => {
         try{
             const data = req.body;
+            
             let correctFormat=true;
             if(!data.hasOwnProperty('first_name') || !data.hasOwnProperty('last_name') 
             || !data.hasOwnProperty('password') || !data.hasOwnProperty('email')){
@@ -43,6 +44,8 @@ module.exports=(app, passport)=>{
             const {username, password}=req.body;
             const response = await authHelperInstance.login({email:username, password});
             if(response){
+           
+                
                 res.status(200).send(response);
             }else{
                 res.status(500).send("Email or password are incorrect");
